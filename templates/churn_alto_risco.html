@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block titulo %}Alto risco{% endblock %}
+{% block titulo_pagina %}Alunos em alto risco{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Competência {{ referencia or "—" }} · {{ itens|length }} aluno(s)</div>{% endblock %}
+
+{% block conteudo %}
+{% if not mongo_ok %}
+  <div class="painel"><p class="vazio">MongoDB indisponível.</p></div>
+{% else %}
+
+<div class="painel">
+  <form method="get" class="form-linha">
+    <div class="campo">
+      <label for="data_referencia">Competência (AAAA-MM)</label>
+      <input type="month" id="data_referencia" name="data_referencia" value="{{ referencia or '' }}">
+    </div>
+    <div class="campo"><button type="submit">Ver</button></div>
+  </form>
+</div>
+
+<div class="painel">
+  {% if itens %}
+  <div class="tabela-scroll">
+  <table>
+    <thead><tr><th>Aluno</th><th>Matrícula</th><th>Telefone</th><th class="num">Prob. churn</th><th>Modelo</th></tr></thead>
+    <tbody>
+      {% for it in itens %}
+      <tr>
+        <td>{% if it.matricula %}<a href="{{ url_for('alunos.detalhe', matricula=it.matricula) }}">{{ it.nome or it.id_aluno }}</a>{% else %}{{ it.id_aluno }}{% endif %}</td>
+        <td class="tag-mono">{{ it.matricula or '—' }}</td>
+        <td>{{ it.telefone or '—' }}</td>
+        <td class="num">{{ '%.0f' % (it.prob_churn * 100) }}%</td>
+        <td class="tag-mono">{{ it.modelo_versao }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+    <p class="vazio">Nenhum aluno em alto risco para esta competência (ou ainda não há predições).</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

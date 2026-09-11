@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block titulo %}Simular predição{% endblock %}
+{% block titulo_pagina %}Simular predição de churn{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Aplica o modelo vigente a atributos informados, sem persistir</div>{% endblock %}
+
+{% block conteudo %}
+{% if not modelo %}
+  <div class="painel"><p class="vazio">Nenhum modelo carregado. Treine um modelo em <a href="{{ url_for('admin.index') }}">Admin / Modelo</a>.</p></div>
+{% else %}
+
+<div class="grade-2">
+  <div class="painel">
+    <h2>Atributos do aluno</h2>
+    <form method="post">
+      <h4 style="margin:0 0 8px 0; font-size:12px; text-transform:uppercase; color:var(--texto-suave);">Numéricos</h4>
+      <div class="grade-form">
+        {% for f in num_features %}
+        <div class="campo">
+          <label for="{{ f }}">{{ f }}</label>
+          <input type="number" step="any" id="{{ f }}" name="{{ f }}" value="{{ valores.get(f, '') }}">
+        </div>
+        {% endfor %}
+      </div>
+
+      <h4 style="margin:16px 0 8px 0; font-size:12px; text-transform:uppercase; color:var(--texto-suave);">Categóricos</h4>
+      <div class="grade-form">
+        <div class="campo">
+          <label for="modalidade_grupo">modalidade_grupo</label>
+          <select id="modalidade_grupo" name="modalidade_grupo">
+            {% for opc in ["Academia/Fitness","Natação","Hidroginástica","Lutas","Crosstraining","Outros","Desconhecida"] %}
+              <option value="{{ opc }}" {{ 'selected' if valores.get('modalidade_grupo') == opc }}>{{ opc }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="campo">
+          <label for="recorrencia">recorrencia</label>
+          <select id="recorrencia" name="recorrencia">
+            <option value="Sim" {{ 'selected' if valores.get('recorrencia') == 'Sim' }}>Sim</option>
+            <option value="Não" {{ 'selected' if valores.get('recorrencia') == 'Não' }}>Não</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="plano">plano</label>
+          <input type="text" id="plano" name="plano" value="{{ valores.get('plano', '') }}" placeholder="Ex.: PLANO GOLD">
+        </div>
+        <div class="campo">
+          <label for="forma_pgto">forma_pgto</label>
+          <input type="text" id="forma_pgto" name="forma_pgto" value="{{ valores.get('forma_pgto', '') }}" placeholder="Ex.: Cartao, Pix, Boleto…">
+        </div>
+      </div>
+
+      <button type="submit" style="margin-top:6px;">Calcular risco</button>
+    </form>
+  </div>
+
+  <div class="painel">
+    <h2>Resultado</h2>
+    {% if resultado and resultado.erro %}
+      <p class="vazio">{{ resultado.erro }}</p>
+    {% elif resultado %}
+      <p style="font-size:16px;">
+        <span class="pill {{ resultado.faixa_risco | lower | replace('é','e') }}">{{ resultado.faixa_risco }}</span>
+        — probabilidade de churn: <strong>{{ '%.1f' % (resultado.prob_churn * 100) }}%</strong>
+      </p>
+      <div class="descricao">Modelo {{ resultado.modelo_versao }}</div>
+    {% else %}
+      <p class="vazio">Preencha os atributos e clique em "Calcular risco".</p>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

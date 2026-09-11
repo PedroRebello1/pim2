@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block titulo %}Alunos{% endblock %}
+{% block titulo_pagina %}Alunos{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Cadastro operacional — {{ total }} aluno(s)</div>{% endblock %}
+
+{% block conteudo %}
+{% if not mongo_ok %}
+  <div class="painel"><p class="vazio">MongoDB indisponível — não é possível listar o cadastro de alunos.</p></div>
+{% else %}
+
+<div class="painel">
+  <form method="get" class="form-linha">
+    <div class="campo" style="flex:2; min-width:220px;">
+      <label for="q">Buscar por nome ou matrícula</label>
+      <input type="search" id="q" name="q" value="{{ busca or '' }}" placeholder="Ex.: Maria, 14858…">
+    </div>
+    <div class="campo" style="min-width:160px;">
+      <label for="situacao">Situação</label>
+      <select id="situacao" name="situacao">
+        <option value="">Todas</option>
+        <option value="Ativo" {{ 'selected' if situacao == 'Ativo' }}>Ativo</option>
+        <option value="Cancelado" {{ 'selected' if situacao == 'Cancelado' }}>Cancelado</option>
+      </select>
+    </div>
+    <div class="campo"><button type="submit">Filtrar</button></div>
+  </form>
+</div>
+
+<div class="painel">
+  {% if itens %}
+  <div class="tabela-scroll">
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Matrícula</th><th>Plano</th><th>Situação</th><th class="num">Mensalidade</th><th>Telefone</th></tr>
+    </thead>
+    <tbody>
+      {% for a in itens %}
+      <tr>
+        <td><a href="{{ url_for('alunos.detalhe', matricula=a.matricula) }}">{{ a.nome or '—' }}</a></td>
+        <td class="tag-mono">{{ a.matricula }}</td>
+        <td>{{ a.plano or '—' }}</td>
+        <td><span class="pill {{ 'ativo' if a.situacao == 'Ativo' else 'cancelado' }}">{{ a.situacao }}</span></td>
+        <td class="num">{{ 'R$ %.2f' % a.valor_mensalidade if a.valor_mensalidade else '—' }}</td>
+        <td>{{ a.telefone or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <div class="paginacao">
+    {% if pagina > 1 %}<a href="{{ url_for('alunos.lista', q=busca, situacao=situacao, pagina=pagina-1) }}">‹ anterior</a>{% endif %}
+    <span class="atual">{{ pagina }} / {{ paginas }}</span>
+    {% if pagina < paginas %}<a href="{{ url_for('alunos.lista', q=busca, situacao=situacao, pagina=pagina+1) }}">próxima ›</a>{% endif %}
+  </div>
+  {% else %}
+    <p class="vazio">Nenhum aluno encontrado. Se a base ainda está vazia, rode uma ingestão em "Ingestão mensal".</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

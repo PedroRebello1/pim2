@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block titulo %}Dashboard{% endblock %}
+{% block titulo_pagina %}Dashboard{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Visão geral da base, risco de churn e inadimplência</div>{% endblock %}
+
+{% block conteudo %}
+{% if not mongo_ok %}
+  <div class="painel"><p class="vazio">MongoDB indisponível — conecte o banco (ver .env) para ver os indicadores. A navegação continua funcionando em modo degradado.</p></div>
+{% else %}
+
+<div class="grade-kpi">
+  <div class="kpi"><div class="valor">{{ kpis.total_alunos or 0 }}</div><div class="rotulo">Alunos cadastrados</div></div>
+  <div class="kpi"><div class="valor baixo">{{ kpis.ativos or 0 }}</div><div class="rotulo">Ativos</div></div>
+  <div class="kpi"><div class="valor alto">{{ kpis.cancelados or 0 }}</div><div class="rotulo">Cancelados</div></div>
+  <div class="kpi"><div class="valor alto">{{ kpis.alto_risco or 0 }}</div><div class="rotulo">Em alto risco ({{ kpis.ultima_referencia or "—" }})</div></div>
+  <div class="kpi"><div class="valor medio">{{ kpis.parcelas_em_aberto or 0 }}</div><div class="rotulo">Parcelas em aberto</div></div>
+  <div class="kpi"><div class="valor alto">{{ kpis.parcelas_atrasadas or 0 }}</div><div class="rotulo">Parcelas em atraso</div></div>
+</div>
+
+<div class="grade-2">
+  <div class="painel">
+    <h2>Alunos em alto risco por competência</h2>
+    <div class="descricao">Resultado das últimas execuções de pontuação mensal</div>
+    {% if execucoes %}
+      <div class="chart-wrap"><canvas id="grafico-execucoes"></canvas></div>
+    {% else %}
+      <p class="vazio">Ainda não há execuções de pontuação registradas. Rode uma ingestão em "Ingestão mensal".</p>
+    {% endif %}
+  </div>
+
+  <div class="painel">
+    <h2>Distribuição de risco</h2>
+    <div class="descricao">Competência {{ referencia or "—" }}</div>
+    {% if dist_risco %}
+      <div class="chart-wrap pequeno"><canvas id="grafico-risco"></canvas></div>
+    {% else %}
+      <p class="vazio">Sem predições registradas ainda.</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="painel">
+  <h2>Alunos por plano</h2>
+  <div class="descricao">Top planos por número de alunos cadastrados (todas as competências)</div>
+  {% if planos %}
+    <div class="chart-wrap"><canvas id="grafico-planos"></canvas></div>
+  {% else %}
+    <p class="vazio">Nenhum plano cadastrado ainda — rode a ingestão de um export.</p>
+  {% endif %}
+</div>
+
+<div class="painel">
+  <h2>Status do modelo</h2>
+  {% if modelo %}
+    <table>
+      <tr><th>Versão</th><td class="tag-mono">{{ modelo.versao }}</td></tr>
+      <tr><th>Algoritmo</th><td>{{ modelo.meta.get('algoritmo', '—') }}</td></tr>
+      <tr><th>ROC-AUC (teste)</th><td>{{ '%.3f' % modelo.meta.get('metricas_teste', {}).get('roc_auc', 0) }}</td></tr>
+      <tr><th>Alunos no treino</th><td>{{ modelo.meta.get('n_alunos_treino', '—') }}</td></tr>
+      <tr><th>Limiares atuais</th><td>Alto ≥ {{ modelo.limiar_alto }} · Médio ≥ {{ modelo.limiar_medio }}</td></tr>
+    </table>
+  {% else %}
+    <p class="vazio">Nenhum modelo carregado ainda. Vá em <a href="{{ url_for('admin.index') }}">Admin / Modelo</a> para treinar um.</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const CORES = { Alto: "#b3261e", "Médio": "#b3790a", Baixo: "#2f7d4f" };
+
+  {% if execucoes %}
+  new Chart(document.getElementById("grafico-execucoes"), {
+    type: "bar",
+    data: {
+      labels: {{ execucoes | map(attribute="data_referencia") | list | tojson }},
+      datasets: [
+        { label: "Alunos pontuados", data: {{ execucoes | map(attribute="n_alunos") | list | tojson }}, backgroundColor: "#c7d3cb" },
+        { label: "Alto risco", data: {{ execucoes | map(attribute="n_alto_risco") | list | tojson }}, backgroundColor: "#b3261e" }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+  });
+  {% endif %}
+
+  {% if dist_risco %}
+  const distRisco = {{ dist_risco | tojson }};
+  new Chart(document.getElementById("grafico-risco"), {
+    type: "doughnut",
+    data: {
+      labels: distRisco.map(d => d._id || "Sem classificação"),
+      datasets: [{ data: distRisco.map(d => d.n), backgroundColor: distRisco.map(d => CORES[d._id] || "#8a9990") }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+  {% endif %}
+
+  {% if planos %}
+  new Chart(document.getElementById("grafico-planos"), {
+    type: "bar",
+    data: {
+      labels: {{ planos | map(attribute="_id") | list | tojson }},
+      datasets: [{ label: "Alunos", data: {{ planos | map(attribute="n_alunos") | list | tojson }}, backgroundColor: "#0e6b55" }]
+    },
+    options: {
+      indexAxis: "y", responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } }
+    }
+  });
+  {% endif %}
+</script>
+{% endblock %}

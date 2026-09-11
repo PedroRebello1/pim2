@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block titulo %}Admin{% endblock %}
+{% block titulo_pagina %}Admin / Modelo{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Limiares de risco, treino e recarga do modelo</div>{% endblock %}
+
+{% block conteudo %}
+<div class="grade-2">
+  <div class="painel">
+    <h2>Limiares de risco</h2>
+    <div class="descricao">Usados em toda a aplicação (predição, pontuação, API) — sobrepõem os do modelo/.env</div>
+    <form method="post">
+      <input type="hidden" name="acao" value="salvar_limiares">
+      <div class="grade-form">
+        <div class="campo">
+          <label for="limiar_alto">Limiar "Alto"</label>
+          <input type="number" id="limiar_alto" name="limiar_alto" min="0" max="1" step="0.01" value="{{ limiar_alto }}">
+        </div>
+        <div class="campo">
+          <label for="limiar_medio">Limiar "Médio"</label>
+          <input type="number" id="limiar_medio" name="limiar_medio" min="0" max="1" step="0.01" value="{{ limiar_medio }}">
+        </div>
+      </div>
+      <button type="submit">Salvar limiares</button>
+    </form>
+  </div>
+
+  <div class="painel">
+    <h2>Status</h2>
+    <table>
+      <tr><th>MongoDB</th><td><span class="badge {{ 'ok' if mongo_ok else 'off' }}">{{ 'online' if mongo_ok else 'offline' }}</span></td></tr>
+      <tr><th>Redis</th><td><span class="badge {{ 'ok' if redis_ok else 'off' }}">{{ 'online' if redis_ok else 'offline' }}</span></td></tr>
+      <tr><th>Modelo carregado</th><td><span class="badge {{ 'ok' if modelo else 'off' }}">{{ 'sim' if modelo else 'não' }}</span></td></tr>
+      <tr><th>Autenticação da API</th><td>{{ 'API_TOKEN definido' if config.API_TOKEN else 'sem token (modo dev)' }}</td></tr>
+      <tr><th>Banco</th><td class="tag-mono">{{ config.MONGO_DB }}</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="painel">
+  <h2>Modelo de churn</h2>
+  {% if modelo %}
+    <table>
+      <tr><th>Versão</th><td class="tag-mono">{{ modelo.versao }}</td></tr>
+      <tr><th>Algoritmo</th><td>{{ modelo.meta.get('algoritmo', '—') }}</td></tr>
+      <tr><th>ROC-AUC (teste)</th><td>{{ '%.3f' % modelo.meta.get('metricas_teste', {}).get('roc_auc', 0) }}</td></tr>
+      <tr><th>Recall (teste)</th><td>{{ '%.3f' % modelo.meta.get('metricas_teste', {}).get('recall', 0) }}</td></tr>
+      <tr><th>Alunos no treino</th><td>{{ modelo.meta.get('n_alunos_treino', '—') }}</td></tr>
+      <tr><th>Treinado em</th><td class="tag-mono">{{ modelo.meta.get('treinado_em', '—') }}</td></tr>
+    </table>
+  {% else %}
+    <p class="vazio">Nenhum modelo carregado ainda.</p>
+  {% endif %}
+
+  <div class="form-linha" style="margin-top:14px;">
+    <form method="post">
+      <input type="hidden" name="acao" value="retreinar">
+      <div class="campo" style="min-width:180px;">
+        <label for="data_referencia_treino">Competência (opcional)</label>
+        <input type="month" id="data_referencia_treino" name="data_referencia">
+      </div>
+      <button type="submit">Retreinar com a base do Mongo</button>
+    </form>
+    <form method="post">
+      <input type="hidden" name="acao" value="pontuar">
+      <div class="campo" style="min-width:180px;">
+        <label for="data_referencia_score">Competência (opcional)</label>
+        <input type="month" id="data_referencia_score" name="data_referencia">
+      </div>
+      <button type="submit" class="secundario">Pontuar novamente</button>
+    </form>
+    <form method="post">
+      <input type="hidden" name="acao" value="recarregar_modelo">
+      <button type="submit" class="secundario">Recarregar artefato do disco</button>
+    </form>
+  </div>
+</div>
+
+<div class="painel">
+  <h2>Últimas execuções</h2>
+  {% if execucoes %}
+  <div class="tabela-scroll">
+  <table>
+    <thead><tr><th>Quando</th><th>Tipo</th><th>Competência</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for e in execucoes %}
+      <tr>
+        <td class="tag-mono">{{ e.data_execucao[:19] if e.data_execucao else '—' }}</td>
+        <td><span class="pill neutro">{{ e.tipo }}</span></td>
+        <td>{{ e.data_referencia or '—' }}</td>
+        <td>{% if e.status == 'sucesso' %}<span class="pill baixo">sucesso</span>{% else %}<span class="pill alto">falha</span>{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+    <p class="vazio">Nenhuma execução registrada ainda.</p>
+  {% endif %}
+  <div class="descricao" style="margin-top:10px;">Histórico completo em <a href="{{ url_for('churn.execucoes') }}">Churn → Execuções</a>.</div>
+</div>
+{% endblock %}

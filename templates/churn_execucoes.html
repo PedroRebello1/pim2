@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titulo %}Execuções{% endblock %}
+{% block titulo_pagina %}Histórico de execuções{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Ingestão, pontuação e treino — observabilidade da rotina de dados</div>{% endblock %}
+
+{% block conteudo %}
+{% if not mongo_ok %}
+  <div class="painel"><p class="vazio">MongoDB indisponível.</p></div>
+{% else %}
+<div class="painel">
+  {% if itens %}
+  <div class="tabela-scroll">
+  <table>
+    <thead><tr><th>Quando</th><th>Tipo</th><th>Competência</th><th>Status</th><th class="num">Duração</th><th>Detalhes</th></tr></thead>
+    <tbody>
+      {% for e in itens %}
+      <tr>
+        <td class="tag-mono">{{ e.data_execucao[:19] if e.data_execucao else '—' }}</td>
+        <td><span class="pill neutro">{{ e.tipo }}</span></td>
+        <td>{{ e.data_referencia or '—' }}</td>
+        <td>
+          {% if e.status == 'sucesso' %}<span class="pill baixo">sucesso</span>
+          {% else %}<span class="pill alto">falha</span>{% endif %}
+        </td>
+        <td class="num">{{ ('%.1fs' % e.duracao_seg) if e.duracao_seg is not none else '—' }}</td>
+        <td style="font-size:12.5px; color:var(--texto-suave);">
+          {% if e.erro %}
+            {{ e.erro }}
+          {% elif e.tipo == 'ingestao' %}
+            {{ e.n_parcelas }} parcelas · {{ e.n_alunos }} alunos · taxa churn {{ '%.1f%%' % (e.taxa_churn * 100) if e.taxa_churn is not none else '—' }}
+          {% elif e.tipo == 'scoring' %}
+            {{ e.n_alunos }} alunos pontuados · {{ e.n_alto_risco }} em alto risco · modelo {{ e.modelo_versao }}
+          {% elif e.tipo == 'treino' %}
+            {{ e.algoritmo }} · ROC-AUC {{ '%.3f' % e.roc_auc_teste if e.roc_auc_teste is not none else '—' }} · {{ e.n_alunos_treino }} alunos
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+    <p class="vazio">Nenhuma execução registrada ainda.</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

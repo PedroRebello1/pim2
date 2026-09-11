@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block titulo %}{{ aluno.nome if aluno else 'Aluno' }}{% endblock %}
+{% block titulo_pagina %}{{ aluno.nome if aluno else 'Aluno não encontrado' }}{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">{{ 'Matrícula ' ~ aluno.matricula if aluno else '' }}</div>{% endblock %}
+
+{% block conteudo %}
+{% if not mongo_ok %}
+  <div class="painel"><p class="vazio">MongoDB indisponível.</p></div>
+{% elif not aluno %}
+  <div class="painel"><p class="vazio">Aluno não encontrado no cadastro.</p></div>
+{% else %}
+
+{% set ultima_pred = predicoes[0] if predicoes else None %}
+
+<div class="grade-2">
+  <div class="painel">
+    <h2>Dados cadastrais</h2>
+    <table>
+      <tr><th>Situação</th><td><span class="pill {{ 'ativo' if aluno.situacao == 'Ativo' else 'cancelado' }}">{{ aluno.situacao }}</span></td></tr>
+      <tr><th>Plano</th><td>{{ aluno.plano or '—' }}</td></tr>
+      <tr><th>Turma</th><td>{{ aluno.turma or '—' }}</td></tr>
+      <tr><th>Modalidades</th><td>{{ aluno.modalidades or '—' }}</td></tr>
+      <tr><th>Forma de pagamento</th><td>{{ aluno.forma_pgto or '—' }}</td></tr>
+      <tr><th>Mensalidade média</th><td class="num">{{ 'R$ %.2f' % aluno.valor_mensalidade if aluno.valor_mensalidade else '—' }}</td></tr>
+      <tr><th>Telefone</th><td>{{ aluno.telefone or '—' }}</td></tr>
+      <tr><th>Matrícula desde</th><td>{{ aluno.data_matricula.strftime('%d/%m/%Y') if aluno.data_matricula else '—' }}</td></tr>
+      {% if aluno.situacao == 'Cancelado' %}
+      <tr><th>Cancelado em</th><td>{{ aluno.data_cancelamento.strftime('%d/%m/%Y') if aluno.data_cancelamento else '—' }}</td></tr>
+      {% endif %}
+      <tr><th>id_aluno (analítico)</th><td class="tag-mono">{{ aluno.id_aluno }}</td></tr>
+    </table>
+  </div>
+
+  <div class="painel">
+    <h2>Risco de churn</h2>
+    {% if ultima_pred %}
+      <p style="font-size:15px;">
+        <span class="pill {{ ultima_pred.faixa_risco | lower | replace('é','e') }}">{{ ultima_pred.faixa_risco }}</span>
+        — probabilidade {{ '%.0f' % (ultima_pred.prob_churn * 100) }}% (competência {{ ultima_pred.data_referencia }})
+      </p>
+      <div class="descricao">Limiares vigentes: Alto ≥ {{ limiar_alto }} · Médio ≥ {{ limiar_medio }} · Modelo {{ ultima_pred.modelo_versao }}</div>
+      {% if predicoes|length > 1 %}
+        <table style="margin-top:10px;">
+          <thead><tr><th>Competência</th><th class="num">Prob. churn</th><th>Faixa</th></tr></thead>
+          <tbody>
+          {% for p in predicoes %}
+            <tr><td>{{ p.data_referencia }}</td><td class="num">{{ '%.0f' % (p.prob_churn * 100) }}%</td>
+                <td><span class="pill {{ p.faixa_risco | lower | replace('é','e') }}">{{ p.faixa_risco }}</span></td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    {% else %}
+      <p class="vazio">Nenhuma predição registrada para este aluno ainda.</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="painel">
+  <h2>Histórico de parcelas</h2>
+  <div class="descricao">{{ aluno.n_parcelas }} parcela(s) no total</div>
+  {% if parcelas %}
+  <div class="tabela-scroll">
+  <table>
+    <thead><tr><th>Parcela</th><th>Vencimento</th><th>Pagamento</th><th class="num">Valor</th><th>Situação</th><th>Forma</th></tr></thead>
+    <tbody>
+      {% for p in parcelas %}
+      <tr>
+        <td>{{ p.parcela or '—' }}</td>
+        <td>{{ p.vencimento.strftime('%d/%m/%Y') if p.vencimento else '—' }}</td>
+        <td>{{ p.pagamento.strftime('%d/%m/%Y') if p.pagamento else '—' }}</td>
+        <td class="num">{{ 'R$ %.2f' % p.valor if p.valor is not none else '—' }}</td>
+        <td><span class="pill {{ {'Pago':'pago','Cancelado':'cancelado','Em Aberto':'emaberto'}.get(p.situacao, 'neutro') }}">{{ p.situacao }}</span></td>
+        <td>{{ p.forma_pgto or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+    <p class="vazio">Sem parcelas registradas na trilha analítica.</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

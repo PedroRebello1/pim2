@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block titulo %}Entrar{% endblock %}
+{% block conteudo_publico %}
+<div class="tela-login">
+  <div class="cartao-login">
+    <h1>Gestão de Academias</h1>
+    <p class="sub">CEUB · Painel administrativo (PIM2)</p>
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% for categoria, msg in mensagens %}
+        <div class="flash {{ categoria }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="post">
+      <div class="campo">
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" autofocus required>
+      </div>
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required>
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
+
+    {% if not mongo_ok %}
+      <p class="aviso-degradado">MongoDB indisponível — usando credenciais do ambiente (modo de demonstração).</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

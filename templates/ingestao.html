@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block titulo %}Ingestão{% endblock %}
+{% block titulo_pagina %}Ingestão mensal{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Envie o export de parcelas (.xls/.xlsx) da academia</div>{% endblock %}
+
+{% block conteudo %}
+<div class="grade-2">
+  <div class="painel">
+    <h2>Novo export</h2>
+    <div class="descricao">
+      O arquivo passa por limpeza, anonimização (LGPD) e engenharia de atributos; alimenta as
+      coleções <span class="tag-mono">cadastro_alunos</span>, <span class="tag-mono">parcelas</span> e
+      <span class="tag-mono">alunos</span>, e — se houver um modelo carregado — dispara a pontuação
+      automaticamente para a competência informada.
+    </div>
+    <form method="post" enctype="multipart/form-data">
+      <div class="campo">
+        <label for="arquivo">Arquivo do export</label>
+        <input type="file" id="arquivo" name="arquivo" accept=".xls,.xlsx" required>
+      </div>
+      <div class="campo" style="max-width:220px;">
+        <label for="data_referencia">Competência (AAAA-MM)</label>
+        <input type="month" id="data_referencia" name="data_referencia">
+        <div class="descricao" style="margin-top:4px;">Em branco = mês corrente</div>
+      </div>
+      <button type="submit">Processar ingestão</button>
+    </form>
+  </div>
+
+  <div class="painel">
+    <h2>Resultado</h2>
+    {% if resultado %}
+      {% if resultado.status == 'sucesso' %}
+        <table>
+          <tr><th>Competência</th><td>{{ resultado.data_referencia }}</td></tr>
+          <tr><th>Parcelas gravadas</th><td class="num">{{ resultado.n_parcelas }}</td></tr>
+          <tr><th>Alunos (base ML)</th><td class="num">{{ resultado.n_alunos }}</td></tr>
+          <tr><th>Cadastro atualizado</th><td class="num">{{ resultado.n_cadastro_atualizado }}</td></tr>
+          <tr><th>Taxa de churn</th><td class="num">{{ '%.1f%%' % (resultado.taxa_churn * 100) if resultado.taxa_churn is not none else '—' }}</td></tr>
+          <tr><th>Duração</th><td class="num">{{ '%.1fs' % resultado.duracao_seg if resultado.duracao_seg is not none else '—' }}</td></tr>
+        </table>
+        {% if resultado.pontuacao %}
+          <h4 style="margin:14px 0 4px 0; font-size:12px; text-transform:uppercase; color:var(--texto-suave);">Pontuação disparada em seguida</h4>
+          {% if resultado.pontuacao.status == 'sucesso' %}
+            <p>{{ resultado.pontuacao.n_alunos }} alunos pontuados · {{ resultado.pontuacao.n_alto_risco }} em alto risco.</p>
+          {% else %}
+            <p class="vazio">{{ resultado.pontuacao.erro }}</p>
+          {% endif %}
+        {% else %}
+          <p class="descricao" style="margin-top:10px;">Nenhum modelo carregado — a pontuação não foi disparada. Treine um modelo em Admin.</p>
+        {% endif %}
+      {% else %}
+        <p class="vazio">Falha: {{ resultado.erro }}</p>
+      {% endif %}
+    {% else %}
+      <p class="vazio">Envie um arquivo para ver o resultado aqui.</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="painel">
+  <h2>Últimas ingestões</h2>
+  {% if historico %}
+  <div class="tabela-scroll">
+  <table>
+    <thead><tr><th>Quando</th><th>Competência</th><th>Status</th><th class="num">Parcelas</th><th class="num">Alunos</th></tr></thead>
+    <tbody>
+      {% for h in historico %}
+      <tr>
+        <td class="tag-mono">{{ h.data_execucao[:19] if h.data_execucao else '—' }}</td>
+        <td>{{ h.data_referencia or '—' }}</td>
+        <td>{% if h.status == 'sucesso' %}<span class="pill baixo">sucesso</span>{% else %}<span class="pill alto">falha</span>{% endif %}</td>
+        <td class="num">{{ h.n_parcelas if h.n_parcelas is not none else '—' }}</td>
+        <td class="num">{{ h.n_alunos if h.n_alunos is not none else '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+    <p class="vazio">Nenhuma ingestão registrada ainda.</p>
+  {% endif %}
+</div>
+{% endblock %}

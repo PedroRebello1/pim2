@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block titulo %}Financeiro{% endblock %}
+{% block titulo_pagina %}Financeiro{% endblock %}
+{% block subtitulo_pagina %}<div class="subtitulo">Situação das parcelas e inadimplência</div>{% endblock %}
+
+{% block conteudo %}
+{% if not mongo_ok %}
+  <div class="painel"><p class="vazio">MongoDB indisponível.</p></div>
+{% else %}
+
+<div class="grade-kpi">
+  {% for r in resumo %}
+  <div class="kpi">
+    <div class="valor {{ 'baixo' if r._id == 'Pago' else ('alto' if r._id == 'Cancelado' else 'medio') }}">{{ r.n }}</div>
+    <div class="rotulo">{{ r._id }} — R$ {{ '%.2f' % r.valor }}</div>
+  </div>
+  {% else %}
+  <div class="painel"><p class="vazio">Nenhuma parcela na base ainda.</p></div>
+  {% endfor %}
+</div>
+
+<div class="grade-2">
+  <div class="painel">
+    <h2>Inadimplência por plano</h2>
+    <div class="descricao">Parcelas "Em Aberto" — soma do valor pendente</div>
+    {% if inadimplencia %}
+      <div class="chart-wrap"><canvas id="grafico-inadimplencia"></canvas></div>
+    {% else %}
+      <p class="vazio">Nenhuma parcela em aberto registrada.</p>
+    {% endif %}
+  </div>
+
+  <div class="painel">
+    <h2>Formas de pagamento</h2>
+    <div class="descricao">Parcelas pagas, por forma de pagamento</div>
+    {% if formas %}
+      <div class="chart-wrap pequeno"><canvas id="grafico-formas"></canvas></div>
+    {% else %}
+      <p class="vazio">Sem parcelas pagas registradas.</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="painel">
+  <h2>Parcelas em atraso</h2>
+  <div class="descricao">Vencimento já passado e situação ainda "Em Aberto" — {{ atrasadas|length }} parcela(s)</div>
+  {% if atrasadas %}
+  <div class="tabela-scroll">
+  <table>
+    <thead><tr><th>Aluno</th><th>Matrícula</th><th>Plano</th><th>Vencimento</th><th class="num">Valor</th></tr></thead>
+    <tbody>
+      {% for p in atrasadas %}
+      <tr>
+        <td>{% if p.matricula %}<a href="{{ url_for('alunos.detalhe', matricula=p.matricula) }}">{{ p.nome or p.id_aluno }}</a>{% else %}{{ p.id_aluno }}{% endif %}</td>
+        <td class="tag-mono">{{ p.matricula or '—' }}</td>
+        <td>{{ p.plano or '—' }}</td>
+        <td>{{ p.vencimento.strftime('%d/%m/%Y') if p.vencimento else '—' }}</td>
+        <td class="num">{{ 'R$ %.2f' % p.valor if p.valor is not none else '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+    <p class="vazio">Nenhuma parcela em atraso no momento — ótimo sinal.</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if inadimplencia %}
+<script>
+  new Chart(document.getElementById("grafico-inadimplencia"), {
+    type: "bar",
+    data: {
+      labels: {{ inadimplencia | map(attribute="_id") | list | tojson }},
+      datasets: [{ label: "Valor em aberto (R$)", data: {{ inadimplencia | map(attribute="valor_total") | list | tojson }}, backgroundColor: "#b3790a" }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+  });
+</script>
+{% endif %}
+{% if formas %}
+<script>
+  new Chart(document.getElementById("grafico-formas"), {
+    type: "doughnut",
+    data: {
+      labels: {{ formas | map(attribute="_id") | list | tojson }},
+      datasets: [{ data: {{ formas | map(attribute="valor") | list | tojson }}, backgroundColor: ["#0e6b55","#2f7d4f","#b3790a","#5c8f7c","#8a9990","#b3261e","#3e5c50","#c9a227"] }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+</script>
+{% endif %}
+{% endblock %}

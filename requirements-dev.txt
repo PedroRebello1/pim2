@@ -1,0 +1,3 @@
+# Opcional — só necessário se você for usar MONGO_MOCK=true (ver .env.example
+# e README, seção "Opção C"). Não é preciso instalar isso em produção.
+mongomock>=4.1

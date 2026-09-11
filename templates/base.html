@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Painel{% endblock %} · Gestão de Academias</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+{% if usuario_logado %}
+<div class="shell">
+  <aside class="sidebar">
+    <div class="marca">
+      <strong>Gestão de Academias</strong>
+      <span>CEUB · Projeto Integrador 2</span>
+    </div>
+
+    <nav class="nav-grupo">
+      <h4>Visão geral</h4>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'dashboard.index' }}" href="{{ url_for('dashboard.index') }}">Dashboard</a>
+    </nav>
+
+    <nav class="nav-grupo">
+      <h4>Gestão</h4>
+      <a class="nav-link {{ 'ativo' if request.endpoint and request.endpoint.startswith('alunos.') }}" href="{{ url_for('alunos.lista') }}">Alunos</a>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'financeiro.index' }}" href="{{ url_for('financeiro.index') }}">Financeiro</a>
+    </nav>
+
+    <nav class="nav-grupo">
+      <h4>Churn (ML)</h4>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'churn.prever' }}" href="{{ url_for('churn.prever') }}">Simular predição</a>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'churn.alto_risco' }}" href="{{ url_for('churn.alto_risco') }}">Alto risco</a>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'churn.execucoes' }}" href="{{ url_for('churn.execucoes') }}">Execuções</a>
+    </nav>
+
+    <nav class="nav-grupo">
+      <h4>Operação</h4>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'ingestao.index' }}" href="{{ url_for('ingestao.index') }}">Ingestão mensal</a>
+      <a class="nav-link {{ 'ativo' if request.endpoint == 'admin.index' }}" href="{{ url_for('admin.index') }}">Admin / Modelo</a>
+    </nav>
+
+    <div class="sidebar-rodape">
+      Logado como <strong>{{ usuario_logado }}</strong>
+      <form action="{{ url_for('auth.logout') }}" method="get">
+        <button type="submit">Sair</button>
+      </form>
+    </div>
+  </aside>
+
+  <div class="principal">
+    <div class="topbar">
+      <div>
+        <h1>{% block titulo_pagina %}{% endblock %}</h1>
+        {% block subtitulo_pagina %}{% endblock %}
+      </div>
+      <div class="status-badges">
+        <span class="badge {{ 'ok' if mongo_status else 'off' }}">MongoDB {{ 'online' if mongo_status else 'offline' }}</span>
+        <span class="badge {{ 'ok' if redis_status else 'off' }}">Redis {{ 'online' if redis_status else 'offline' }}</span>
+      </div>
+    </div>
+
+    <div class="conteudo">
+      {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      {% block conteudo %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% else %}
+  {% block conteudo_publico %}{% endblock %}
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
