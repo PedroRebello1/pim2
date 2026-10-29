@@ -1,0 +1,56 @@
+tentativas: 4347 (15/08/2026-15/10/2026) | corte do teste: 01/10/2026
+re-tentativas: treino 2063 (65 aprov.) | teste 690 (31 aprov.)
+{
+  "periodo": [
+    "15/08/2026",
+    "15/10/2026"
+  ],
+  "corte_teste": "01/10/2026",
+  "tentativas": 4347,
+  "cartoes": 909,
+  "aprovacao_geral": 0.2984,
+  "retentativas_treino": 2063,
+  "aprov_treino": 65,
+  "retentativas_teste": 690,
+  "aprov_teste": 31,
+  "l2": 1,
+  "auc_validacao_por_l2": {
+    "0.3": 0.903,
+    "1": 0.905,
+    "3": 0.905,
+    "10": 0.905,
+    "30": 0.891
+  },
+  "auc_treino": 0.919,
+  "auc_teste": 0.922,
+  "auc_teste_referencia_codigo": 0.816,
+  "brier_teste": 0.0337,
+  "brier_teste_constante": 0.0431,
+  "codigos_irreversiveis": [
+    "05",
+    "5c",
+    "78",
+    "79",
+    "Fa",
+    "Pac003",
+    "Pac014"
+  ],
+  "teto_falhas": 5,
+  "limiar_modelo": 0.0294,
+  "irrev_cartao_mes": 272,
+  "irrev_valor": 48693.85,
+  "irrev_tentativas_inuteis": 1499,
+  "irrev_dias_insistindo_mediana": 7.0,
+  "fila_data": "15/10/2026",
+  "fila_cartoes": 143,
+  "fila_valor": 24202.59
+}
+                                     politica  tentativas  aprovacoes  valor_aprovado  evitadas  aprovacoes_perdidas  pct_tentativas  pct_aprovacoes  aprov_por_100
+                         Atual: re-tenta tudo         690          31          5386.7         0                    0           1.000           1.000            4.5
+ Regra 1: não re-tentar códigos irreversíveis         319          30          5216.8       371                    1           0.462           0.968            9.4
+Regra 2: regra 1 + teto de 5 recusas seguidas         112          28          4887.0       578                    3           0.162           0.903           25.0
+   Modelo: re-tentar se P(aprovação) ≥ limiar         202          29          5056.9       488                    2           0.293           0.935           14.4
+                       grupo  cartoes    valor
+ Contato: novo cartão ou PIX       76 12282.10
+Contato: parar re-tentativas       45  7780.30
+  Re-tentar em data indicada       22  4140.19

@@ -1,0 +1,5 @@
+politica,tentativas,aprovacoes,valor_aprovado,evitadas,aprovacoes_perdidas,pct_tentativas,pct_aprovacoes,aprov_por_100
+Atual: re-tenta tudo,690,31,5386.699999999998,0,0,1.0,1.0,4.5
+Regra 1: não re-tentar códigos irreversíveis,319,30,5216.799999999998,371,1,0.462,0.968,9.4
+Regra 2: regra 1 + teto de 5 recusas seguidas,112,28,4886.999999999998,578,3,0.162,0.903,25.0
+Modelo: re-tentar se P(aprovação) ≥ limiar,202,29,5056.899999999998,488,2,0.293,0.935,14.4

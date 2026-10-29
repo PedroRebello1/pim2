@@ -1,0 +1,7 @@
+id,valor,ultimo_codigo,recusas_seguidas,acao,motivo
+C-8BBE4,169.9,51,1,Re-tentar em 17/10,P(aprovação) 36% em 17/10 contra 31% amanhã
+C-AC027,209.9,51,2,Re-tentar em 17/10,P(aprovação) 35% em 17/10 contra 30% amanhã
+C-1DF8A,99.9,51,6,Contato: parar re-tentativas,6 recusas seguidas; a partir de 5 a aprovação fica abaixo de 1%
+C-FC63F,99.9,51,5,Contato: parar re-tentativas,5 recusas seguidas; a partir de 5 a aprovação fica abaixo de 1%
+C-2380A,99.9,Pac014,4,Contato: novo cartão ou PIX,"após o código Pac014, a re-tentativa aprova ≤ 1% no histórico"
+C-8350B,169.9,Pac014,12,Contato: novo cartão ou PIX,"após o código Pac014, a re-tentativa aprova ≤ 1% no histórico"
