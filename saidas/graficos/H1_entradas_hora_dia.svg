@@ -1,0 +1,165 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='520' height='475' viewBox='0 0 520 475' font-family='system-ui,-apple-system,Segoe UI,Roboto,sans-serif'>
+<rect width='520' height='475' fill='#fcfcfb' rx='8'/>
+<text x='20' y='28' font-size='15' font-weight='600' fill='#0b0b0b'>Média de entradas por hora e dia da semana</text>
+<text x='20' y='47' font-size='12' fill='#52514e'>Catraca, 15/09-15/10/2026 (1ª entrada do aluno no dia)</text>
+<text x='87.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>seg</text>
+<text x='141.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>ter</text>
+<text x='195.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>qua</text>
+<text x='249.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>qui</text>
+<text x='303.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>sex</text>
+<text x='357.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>sáb</text>
+<text x='411.0' y='77' font-size='11' fill='#52514e' text-anchor='middle'>dom</text>
+<text x='52' y='99' font-size='11' fill='#52514e' text-anchor='end'>5h</text>
+<rect x='61' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>seg 5h: 0.0 entradas/dia</title></rect>
+<rect x='115' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>ter 5h: 0.0 entradas/dia</title></rect>
+<rect x='169' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>qua 5h: 0.2 entradas/dia</title></rect>
+<rect x='223' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>qui 5h: 0.0 entradas/dia</title></rect>
+<rect x='277' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>sex 5h: 0.0 entradas/dia</title></rect>
+<rect x='331' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 5h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='86' width='52' height='18' rx='2' fill='#f0efec'><title>dom 5h: 0.0 entradas/dia</title></rect>
+<text x='52' y='119' font-size='11' fill='#52514e' text-anchor='end'>6h</text>
+<rect x='61' y='106' width='52' height='18' rx='2' fill='#3987e5'><title>seg 6h: 27.0 entradas/dia</title></rect>
+<rect x='115' y='106' width='52' height='18' rx='2' fill='#184f95'><title>ter 6h: 42.2 entradas/dia</title></rect>
+<text x='141.0' y='119' font-size='10' fill='#ffffff' text-anchor='middle'>42</text>
+<rect x='169' y='106' width='52' height='18' rx='2' fill='#0d366b'><title>qua 6h: 49.6 entradas/dia</title></rect>
+<text x='195.0' y='119' font-size='10' fill='#ffffff' text-anchor='middle'>50</text>
+<rect x='223' y='106' width='52' height='18' rx='2' fill='#256abf'><title>qui 6h: 33.4 entradas/dia</title></rect>
+<rect x='277' y='106' width='52' height='18' rx='2' fill='#184f95'><title>sex 6h: 40.8 entradas/dia</title></rect>
+<text x='303.0' y='119' font-size='10' fill='#ffffff' text-anchor='middle'>41</text>
+<rect x='331' y='106' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 6h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='106' width='52' height='18' rx='2' fill='#f0efec'><title>dom 6h: 0.0 entradas/dia</title></rect>
+<text x='52' y='139' font-size='11' fill='#52514e' text-anchor='end'>7h</text>
+<rect x='61' y='126' width='52' height='18' rx='2' fill='#256abf'><title>seg 7h: 28.5 entradas/dia</title></rect>
+<rect x='115' y='126' width='52' height='18' rx='2' fill='#256abf'><title>ter 7h: 30.2 entradas/dia</title></rect>
+<rect x='169' y='126' width='52' height='18' rx='2' fill='#184f95'><title>qua 7h: 41.4 entradas/dia</title></rect>
+<text x='195.0' y='139' font-size='10' fill='#ffffff' text-anchor='middle'>41</text>
+<rect x='223' y='126' width='52' height='18' rx='2' fill='#3987e5'><title>qui 7h: 25.4 entradas/dia</title></rect>
+<rect x='277' y='126' width='52' height='18' rx='2' fill='#256abf'><title>sex 7h: 34.8 entradas/dia</title></rect>
+<rect x='331' y='126' width='52' height='18' rx='2' fill='#cde2fb'><title>sáb 7h: 0.5 entradas/dia</title></rect>
+<rect x='385' y='126' width='52' height='18' rx='2' fill='#f0efec'><title>dom 7h: 0.0 entradas/dia</title></rect>
+<text x='52' y='159' font-size='11' fill='#52514e' text-anchor='end'>8h</text>
+<rect x='61' y='146' width='52' height='18' rx='2' fill='#3987e5'><title>seg 8h: 27.5 entradas/dia</title></rect>
+<rect x='115' y='146' width='52' height='18' rx='2' fill='#6da7ec'><title>ter 8h: 20.0 entradas/dia</title></rect>
+<rect x='169' y='146' width='52' height='18' rx='2' fill='#256abf'><title>qua 8h: 35.0 entradas/dia</title></rect>
+<rect x='223' y='146' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 8h: 18.4 entradas/dia</title></rect>
+<rect x='277' y='146' width='52' height='18' rx='2' fill='#256abf'><title>sex 8h: 29.8 entradas/dia</title></rect>
+<rect x='331' y='146' width='52' height='18' rx='2' fill='#6da7ec'><title>sáb 8h: 18.0 entradas/dia</title></rect>
+<rect x='385' y='146' width='52' height='18' rx='2' fill='#f0efec'><title>dom 8h: 0.0 entradas/dia</title></rect>
+<text x='52' y='179' font-size='11' fill='#52514e' text-anchor='end'>9h</text>
+<rect x='61' y='166' width='52' height='18' rx='2' fill='#9ec5f4'><title>seg 9h: 13.5 entradas/dia</title></rect>
+<rect x='115' y='166' width='52' height='18' rx='2' fill='#3987e5'><title>ter 9h: 22.0 entradas/dia</title></rect>
+<rect x='169' y='166' width='52' height='18' rx='2' fill='#6da7ec'><title>qua 9h: 17.0 entradas/dia</title></rect>
+<rect x='223' y='166' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 9h: 17.4 entradas/dia</title></rect>
+<rect x='277' y='166' width='52' height='18' rx='2' fill='#9ec5f4'><title>sex 9h: 12.2 entradas/dia</title></rect>
+<rect x='331' y='166' width='52' height='18' rx='2' fill='#9ec5f4'><title>sáb 9h: 12.2 entradas/dia</title></rect>
+<rect x='385' y='166' width='52' height='18' rx='2' fill='#f0efec'><title>dom 9h: 0.0 entradas/dia</title></rect>
+<text x='52' y='199' font-size='11' fill='#52514e' text-anchor='end'>10h</text>
+<rect x='61' y='186' width='52' height='18' rx='2' fill='#3987e5'><title>seg 10h: 22.2 entradas/dia</title></rect>
+<rect x='115' y='186' width='52' height='18' rx='2' fill='#6da7ec'><title>ter 10h: 18.4 entradas/dia</title></rect>
+<rect x='169' y='186' width='52' height='18' rx='2' fill='#3987e5'><title>qua 10h: 26.0 entradas/dia</title></rect>
+<rect x='223' y='186' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 10h: 19.2 entradas/dia</title></rect>
+<rect x='277' y='186' width='52' height='18' rx='2' fill='#6da7ec'><title>sex 10h: 15.0 entradas/dia</title></rect>
+<rect x='331' y='186' width='52' height='18' rx='2' fill='#6da7ec'><title>sáb 10h: 16.2 entradas/dia</title></rect>
+<rect x='385' y='186' width='52' height='18' rx='2' fill='#f0efec'><title>dom 10h: 0.0 entradas/dia</title></rect>
+<text x='52' y='219' font-size='11' fill='#52514e' text-anchor='end'>11h</text>
+<rect x='61' y='206' width='52' height='18' rx='2' fill='#9ec5f4'><title>seg 11h: 13.5 entradas/dia</title></rect>
+<rect x='115' y='206' width='52' height='18' rx='2' fill='#6da7ec'><title>ter 11h: 17.0 entradas/dia</title></rect>
+<rect x='169' y='206' width='52' height='18' rx='2' fill='#6da7ec'><title>qua 11h: 17.4 entradas/dia</title></rect>
+<rect x='223' y='206' width='52' height='18' rx='2' fill='#9ec5f4'><title>qui 11h: 10.8 entradas/dia</title></rect>
+<rect x='277' y='206' width='52' height='18' rx='2' fill='#9ec5f4'><title>sex 11h: 13.2 entradas/dia</title></rect>
+<rect x='331' y='206' width='52' height='18' rx='2' fill='#9ec5f4'><title>sáb 11h: 11.0 entradas/dia</title></rect>
+<rect x='385' y='206' width='52' height='18' rx='2' fill='#f0efec'><title>dom 11h: 0.0 entradas/dia</title></rect>
+<text x='52' y='239' font-size='11' fill='#52514e' text-anchor='end'>12h</text>
+<rect x='61' y='226' width='52' height='18' rx='2' fill='#9ec5f4'><title>seg 12h: 9.2 entradas/dia</title></rect>
+<rect x='115' y='226' width='52' height='18' rx='2' fill='#cde2fb'><title>ter 12h: 6.4 entradas/dia</title></rect>
+<rect x='169' y='226' width='52' height='18' rx='2' fill='#9ec5f4'><title>qua 12h: 12.8 entradas/dia</title></rect>
+<rect x='223' y='226' width='52' height='18' rx='2' fill='#cde2fb'><title>qui 12h: 7.0 entradas/dia</title></rect>
+<rect x='277' y='226' width='52' height='18' rx='2' fill='#9ec5f4'><title>sex 12h: 9.0 entradas/dia</title></rect>
+<rect x='331' y='226' width='52' height='18' rx='2' fill='#cde2fb'><title>sáb 12h: 6.0 entradas/dia</title></rect>
+<rect x='385' y='226' width='52' height='18' rx='2' fill='#f0efec'><title>dom 12h: 0.0 entradas/dia</title></rect>
+<text x='52' y='259' font-size='11' fill='#52514e' text-anchor='end'>13h</text>
+<rect x='61' y='246' width='52' height='18' rx='2' fill='#9ec5f4'><title>seg 13h: 8.2 entradas/dia</title></rect>
+<rect x='115' y='246' width='52' height='18' rx='2' fill='#9ec5f4'><title>ter 13h: 7.8 entradas/dia</title></rect>
+<rect x='169' y='246' width='52' height='18' rx='2' fill='#9ec5f4'><title>qua 13h: 7.2 entradas/dia</title></rect>
+<rect x='223' y='246' width='52' height='18' rx='2' fill='#9ec5f4'><title>qui 13h: 8.8 entradas/dia</title></rect>
+<rect x='277' y='246' width='52' height='18' rx='2' fill='#cde2fb'><title>sex 13h: 6.8 entradas/dia</title></rect>
+<rect x='331' y='246' width='52' height='18' rx='2' fill='#cde2fb'><title>sáb 13h: 2.2 entradas/dia</title></rect>
+<rect x='385' y='246' width='52' height='18' rx='2' fill='#f0efec'><title>dom 13h: 0.0 entradas/dia</title></rect>
+<text x='52' y='279' font-size='11' fill='#52514e' text-anchor='end'>14h</text>
+<rect x='61' y='266' width='52' height='18' rx='2' fill='#6da7ec'><title>seg 14h: 14.8 entradas/dia</title></rect>
+<rect x='115' y='266' width='52' height='18' rx='2' fill='#6da7ec'><title>ter 14h: 15.0 entradas/dia</title></rect>
+<rect x='169' y='266' width='52' height='18' rx='2' fill='#9ec5f4'><title>qua 14h: 14.0 entradas/dia</title></rect>
+<rect x='223' y='266' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 14h: 16.0 entradas/dia</title></rect>
+<rect x='277' y='266' width='52' height='18' rx='2' fill='#9ec5f4'><title>sex 14h: 12.0 entradas/dia</title></rect>
+<rect x='331' y='266' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 14h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='266' width='52' height='18' rx='2' fill='#f0efec'><title>dom 14h: 0.0 entradas/dia</title></rect>
+<text x='52' y='299' font-size='11' fill='#52514e' text-anchor='end'>15h</text>
+<rect x='61' y='286' width='52' height='18' rx='2' fill='#6da7ec'><title>seg 15h: 19.2 entradas/dia</title></rect>
+<rect x='115' y='286' width='52' height='18' rx='2' fill='#6da7ec'><title>ter 15h: 20.6 entradas/dia</title></rect>
+<rect x='169' y='286' width='52' height='18' rx='2' fill='#3987e5'><title>qua 15h: 24.6 entradas/dia</title></rect>
+<rect x='223' y='286' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 15h: 18.4 entradas/dia</title></rect>
+<rect x='277' y='286' width='52' height='18' rx='2' fill='#3987e5'><title>sex 15h: 21.5 entradas/dia</title></rect>
+<rect x='331' y='286' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 15h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='286' width='52' height='18' rx='2' fill='#f0efec'><title>dom 15h: 0.0 entradas/dia</title></rect>
+<text x='52' y='319' font-size='11' fill='#52514e' text-anchor='end'>16h</text>
+<rect x='61' y='306' width='52' height='18' rx='2' fill='#3987e5'><title>seg 16h: 26.0 entradas/dia</title></rect>
+<rect x='115' y='306' width='52' height='18' rx='2' fill='#3987e5'><title>ter 16h: 25.6 entradas/dia</title></rect>
+<rect x='169' y='306' width='52' height='18' rx='2' fill='#256abf'><title>qua 16h: 31.0 entradas/dia</title></rect>
+<rect x='223' y='306' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 16h: 20.4 entradas/dia</title></rect>
+<rect x='277' y='306' width='52' height='18' rx='2' fill='#6da7ec'><title>sex 16h: 19.2 entradas/dia</title></rect>
+<rect x='331' y='306' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 16h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='306' width='52' height='18' rx='2' fill='#f0efec'><title>dom 16h: 0.0 entradas/dia</title></rect>
+<text x='52' y='339' font-size='11' fill='#52514e' text-anchor='end'>17h</text>
+<rect x='61' y='326' width='52' height='18' rx='2' fill='#3987e5'><title>seg 17h: 26.5 entradas/dia</title></rect>
+<rect x='115' y='326' width='52' height='18' rx='2' fill='#184f95'><title>ter 17h: 41.8 entradas/dia</title></rect>
+<text x='141.0' y='339' font-size='10' fill='#ffffff' text-anchor='middle'>42</text>
+<rect x='169' y='326' width='52' height='18' rx='2' fill='#256abf'><title>qua 17h: 33.6 entradas/dia</title></rect>
+<rect x='223' y='326' width='52' height='18' rx='2' fill='#256abf'><title>qui 17h: 32.8 entradas/dia</title></rect>
+<rect x='277' y='326' width='52' height='18' rx='2' fill='#6da7ec'><title>sex 17h: 20.5 entradas/dia</title></rect>
+<rect x='331' y='326' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 17h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='326' width='52' height='18' rx='2' fill='#f0efec'><title>dom 17h: 0.0 entradas/dia</title></rect>
+<text x='52' y='359' font-size='11' fill='#52514e' text-anchor='end'>18h</text>
+<rect x='61' y='346' width='52' height='18' rx='2' fill='#256abf'><title>seg 18h: 30.8 entradas/dia</title></rect>
+<rect x='115' y='346' width='52' height='18' rx='2' fill='#0d366b'><title>ter 18h: 45.6 entradas/dia</title></rect>
+<text x='141.0' y='359' font-size='10' fill='#ffffff' text-anchor='middle'>46</text>
+<rect x='169' y='346' width='52' height='18' rx='2' fill='#256abf'><title>qua 18h: 35.4 entradas/dia</title></rect>
+<rect x='223' y='346' width='52' height='18' rx='2' fill='#256abf'><title>qui 18h: 35.0 entradas/dia</title></rect>
+<rect x='277' y='346' width='52' height='18' rx='2' fill='#3987e5'><title>sex 18h: 23.5 entradas/dia</title></rect>
+<rect x='331' y='346' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 18h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='346' width='52' height='18' rx='2' fill='#f0efec'><title>dom 18h: 0.0 entradas/dia</title></rect>
+<text x='52' y='379' font-size='11' fill='#52514e' text-anchor='end'>19h</text>
+<rect x='61' y='366' width='52' height='18' rx='2' fill='#256abf'><title>seg 19h: 30.8 entradas/dia</title></rect>
+<rect x='115' y='366' width='52' height='18' rx='2' fill='#184f95'><title>ter 19h: 39.4 entradas/dia</title></rect>
+<text x='141.0' y='379' font-size='10' fill='#ffffff' text-anchor='middle'>39</text>
+<rect x='169' y='366' width='52' height='18' rx='2' fill='#184f95'><title>qua 19h: 37.8 entradas/dia</title></rect>
+<text x='195.0' y='379' font-size='10' fill='#ffffff' text-anchor='middle'>38</text>
+<rect x='223' y='366' width='52' height='18' rx='2' fill='#184f95'><title>qui 19h: 36.2 entradas/dia</title></rect>
+<rect x='277' y='366' width='52' height='18' rx='2' fill='#3987e5'><title>sex 19h: 21.5 entradas/dia</title></rect>
+<rect x='331' y='366' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 19h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='366' width='52' height='18' rx='2' fill='#f0efec'><title>dom 19h: 0.0 entradas/dia</title></rect>
+<text x='52' y='399' font-size='11' fill='#52514e' text-anchor='end'>20h</text>
+<rect x='61' y='386' width='52' height='18' rx='2' fill='#6da7ec'><title>seg 20h: 17.2 entradas/dia</title></rect>
+<rect x='115' y='386' width='52' height='18' rx='2' fill='#3987e5'><title>ter 20h: 23.8 entradas/dia</title></rect>
+<rect x='169' y='386' width='52' height='18' rx='2' fill='#3987e5'><title>qua 20h: 24.0 entradas/dia</title></rect>
+<rect x='223' y='386' width='52' height='18' rx='2' fill='#6da7ec'><title>qui 20h: 15.2 entradas/dia</title></rect>
+<rect x='277' y='386' width='52' height='18' rx='2' fill='#6da7ec'><title>sex 20h: 21.2 entradas/dia</title></rect>
+<rect x='331' y='386' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 20h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='386' width='52' height='18' rx='2' fill='#f0efec'><title>dom 20h: 0.0 entradas/dia</title></rect>
+<text x='52' y='419' font-size='11' fill='#52514e' text-anchor='end'>21h</text>
+<rect x='61' y='406' width='52' height='18' rx='2' fill='#cde2fb'><title>seg 21h: 4.2 entradas/dia</title></rect>
+<rect x='115' y='406' width='52' height='18' rx='2' fill='#cde2fb'><title>ter 21h: 5.6 entradas/dia</title></rect>
+<rect x='169' y='406' width='52' height='18' rx='2' fill='#cde2fb'><title>qua 21h: 5.4 entradas/dia</title></rect>
+<rect x='223' y='406' width='52' height='18' rx='2' fill='#cde2fb'><title>qui 21h: 1.4 entradas/dia</title></rect>
+<rect x='277' y='406' width='52' height='18' rx='2' fill='#cde2fb'><title>sex 21h: 4.5 entradas/dia</title></rect>
+<rect x='331' y='406' width='52' height='18' rx='2' fill='#f0efec'><title>sáb 21h: 0.0 entradas/dia</title></rect>
+<rect x='385' y='406' width='52' height='18' rx='2' fill='#f0efec'><title>dom 21h: 0.0 entradas/dia</title></rect>
+<text x='60' y='453' font-size='11' fill='#898781'>menos</text>
+<rect x='102' y='443' width='20' height='12' rx='2' fill='#cde2fb'/>
+<rect x='124' y='443' width='20' height='12' rx='2' fill='#9ec5f4'/>
+<rect x='146' y='443' width='20' height='12' rx='2' fill='#6da7ec'/>
+<rect x='168' y='443' width='20' height='12' rx='2' fill='#3987e5'/>
+<rect x='190' y='443' width='20' height='12' rx='2' fill='#256abf'/>
+<rect x='212' y='443' width='20' height='12' rx='2' fill='#184f95'/>
+<rect x='234' y='443' width='20' height='12' rx='2' fill='#0d366b'/>
+<text x='260' y='453' font-size='11' fill='#898781'>mais (máx. 50)</text>
+</svg>

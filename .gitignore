@@ -1,0 +1,13 @@
+# Dados brutos e caches: contêm dados pessoais, nunca versionar
+*.xls
+*.xlsx
+*.csv.gz
+*.pkl
+*.parquet
+data/
+cache*/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

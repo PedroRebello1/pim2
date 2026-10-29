@@ -1,0 +1,58 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='760' height='340' viewBox='0 0 760 340' font-family='system-ui,-apple-system,Segoe UI,Roboto,sans-serif'>
+<rect width='760' height='340' fill='#fcfcfb' rx='8'/>
+<text x='20' y='28' font-size='15' font-weight='600' fill='#0b0b0b'>Alunos com plano por mês, segundo o export de parcelas</text>
+<text x='20' y='47' font-size='12' fill='#52514e'>Crescimento contínuo = só sobreviventes no export (quem saiu foi excluído)</text>
+<line x1='60' x2='730' y1='290.0' y2='290.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='294.0' font-size='11' fill='#898781' text-anchor='end'>0</text>
+<line x1='60' x2='730' y1='254.2' y2='254.2' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='258.2' font-size='11' fill='#898781' text-anchor='end'>200</text>
+<line x1='60' x2='730' y1='218.3' y2='218.3' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='222.3' font-size='11' fill='#898781' text-anchor='end'>400</text>
+<line x1='60' x2='730' y1='182.5' y2='182.5' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='186.5' font-size='11' fill='#898781' text-anchor='end'>600</text>
+<line x1='60' x2='730' y1='146.7' y2='146.7' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='150.7' font-size='11' fill='#898781' text-anchor='end'>800</text>
+<line x1='60' x2='730' y1='110.8' y2='110.8' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='114.8' font-size='11' fill='#898781' text-anchor='end'>1000</text>
+<line x1='60' x2='730' y1='75.0' y2='75.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='79.0' font-size='11' fill='#898781' text-anchor='end'>1200</text>
+<text x='52' y='63' font-size='11' fill='#898781' text-anchor='end'>alunos</text>
+<polyline points='60.0,253.3 89.1,213.5 118.3,212.1 147.4,205.1 176.5,202.0 205.7,200.6 234.8,200.1 263.9,199.9 293.0,197.4 322.2,191.6 351.3,188.1 380.4,185.4 409.6,183.0 438.7,178.0 467.8,167.3 497.0,157.8 526.1,150.6 555.2,142.9 584.3,129.8 613.5,123.0 642.6,113.9 671.7,99.7 700.9,92.7 730.0,83.4' fill='none' stroke='#2a78d6' stroke-width='2' stroke-linejoin='round'/>
+<circle cx='60.0' cy='253.3' r='9' fill='transparent'><title>2024-10: 205 alunos</title></circle>
+<text x='60.0' y='308' font-size='11' fill='#898781' text-anchor='middle'>2024-10</text>
+<circle cx='89.1' cy='213.5' r='9' fill='transparent'><title>2024-11: 427 alunos</title></circle>
+<circle cx='118.3' cy='212.1' r='9' fill='transparent'><title>2024-12: 435 alunos</title></circle>
+<circle cx='147.4' cy='205.1' r='9' fill='transparent'><title>2025-01: 474 alunos</title></circle>
+<text x='147.4' y='308' font-size='11' fill='#898781' text-anchor='middle'>2025-01</text>
+<circle cx='176.5' cy='202.0' r='9' fill='transparent'><title>2025-02: 491 alunos</title></circle>
+<circle cx='205.7' cy='200.6' r='9' fill='transparent'><title>2025-03: 499 alunos</title></circle>
+<circle cx='234.8' cy='200.1' r='9' fill='transparent'><title>2025-04: 502 alunos</title></circle>
+<text x='234.8' y='308' font-size='11' fill='#898781' text-anchor='middle'>2025-04</text>
+<circle cx='263.9' cy='199.9' r='9' fill='transparent'><title>2025-05: 503 alunos</title></circle>
+<circle cx='293.0' cy='197.4' r='9' fill='transparent'><title>2025-06: 517 alunos</title></circle>
+<circle cx='322.2' cy='191.6' r='9' fill='transparent'><title>2025-07: 549 alunos</title></circle>
+<text x='322.2' y='308' font-size='11' fill='#898781' text-anchor='middle'>2025-07</text>
+<circle cx='351.3' cy='188.1' r='9' fill='transparent'><title>2025-08: 569 alunos</title></circle>
+<circle cx='380.4' cy='185.4' r='9' fill='transparent'><title>2025-09: 584 alunos</title></circle>
+<circle cx='409.6' cy='183.0' r='9' fill='transparent'><title>2025-10: 597 alunos</title></circle>
+<text x='409.6' y='308' font-size='11' fill='#898781' text-anchor='middle'>2025-10</text>
+<circle cx='438.7' cy='178.0' r='9' fill='transparent'><title>2025-11: 625 alunos</title></circle>
+<circle cx='467.8' cy='167.3' r='9' fill='transparent'><title>2025-12: 685 alunos</title></circle>
+<circle cx='497.0' cy='157.8' r='9' fill='transparent'><title>2026-01: 738 alunos</title></circle>
+<text x='497.0' y='308' font-size='11' fill='#898781' text-anchor='middle'>2026-01</text>
+<circle cx='526.1' cy='150.6' r='9' fill='transparent'><title>2026-02: 778 alunos</title></circle>
+<circle cx='555.2' cy='142.9' r='9' fill='transparent'><title>2026-03: 821 alunos</title></circle>
+<circle cx='584.3' cy='129.8' r='9' fill='transparent'><title>2026-04: 894 alunos</title></circle>
+<text x='584.3' y='308' font-size='11' fill='#898781' text-anchor='middle'>2026-04</text>
+<circle cx='613.5' cy='123.0' r='9' fill='transparent'><title>2026-05: 932 alunos</title></circle>
+<circle cx='642.6' cy='113.9' r='9' fill='transparent'><title>2026-06: 983 alunos</title></circle>
+<circle cx='671.7' cy='99.7' r='9' fill='transparent'><title>2026-07: 1062 alunos</title></circle>
+<text x='671.7' y='308' font-size='11' fill='#898781' text-anchor='middle'>2026-07</text>
+<circle cx='700.9' cy='92.7' r='9' fill='transparent'><title>2026-08: 1101 alunos</title></circle>
+<circle cx='730.0' cy='83.4' r='9' fill='transparent'><title>2026-09: 1153 alunos</title></circle>
+<text x='730.0' y='308' font-size='11' fill='#898781' text-anchor='middle'>2026-09</text>
+<circle cx='60.0' cy='253.3' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<text x='60.0' y='243.3' font-size='12' font-weight='600' fill='#0b0b0b' text-anchor='start'>205</text>
+<circle cx='730.0' cy='83.4' r='4' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'/>
+<text x='730.0' y='73.4' font-size='12' font-weight='600' fill='#0b0b0b' text-anchor='end'>1153</text>
+</svg>

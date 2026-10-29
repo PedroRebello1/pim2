@@ -1,0 +1,164 @@
+
+======== A. Perfil das bases ========
+parcelas: 19875 linhas | alunos 1244 | contratos de plano 2648 | vencimento 15/10/2024-15/10/2026
+situação: {'Pago': 18625, 'Cancelado': 1048, 'Em Aberto': 202}
+contrato 0 (avulsas/acertos): 1615 linhas
+acessos: 9228 linhas | alunos 1081 | 15/09/2026-15/10/2026 | com saída registrada 12
+transações: 4347 | cartões 908 | 15/08/2026-15/10/2026 | aprovadas 1297 (29.8%)
+flag Recorrência vs nome do plano (planos com 'RECORR' no nome): {'Não': 1198, 'Sim': 127}
+
+======== B. Pagamento - Vencimento (dias) por forma de pagamento ========
+                    count   mean    std    min     5%    50%   95%   max
+Forma Pgto                                                              
+CARTÃO RECORRENTE  9025.0    0.6    3.4   -7.0    0.0    0.0   4.0  88.0
+CARTÃO DE CRÉDITO  3494.0  -61.8   98.5 -457.0 -274.0    0.0   9.0  71.0
+PIX                2472.0   -6.6   49.9 -519.0  -21.0    0.0  16.0  61.0
+CHEQUE             2290.0 -195.9  136.5 -519.0 -427.0 -182.0   0.0   5.0
+CARTÃO DE DÉBITO    520.0    1.1   24.0 -361.0   -4.0    0.0  16.0  76.0
+DINHEIRO            403.0   -6.9   32.6 -212.0  -61.0    0.0  10.9  42.0
+CONTA BANCÁRIA       88.0   -0.9    7.6  -62.0    0.0    0.0   0.0  16.0
+canceladas com data de pagamento: 0 de 1048
+
+======== C. Eventos de contrato (cobertura) e teste do rótulo do PIM I ========
+tem_cancelada                    False  True   All
+status                                            
+coberto_por_contrato_sobreposto    287     8   295
+em_curso_ou_censurado             1201     5  1206
+renovacao                          694     0   694
+saida_com_cancelamento               0    91    91
+saida_sem_renovar                  268     0   268
+troca_ou_renovacao                   0    94    94
+All                               2450   198  2648
+rótulo PIM I (>=1 parcela cancelada): 168 de 1243 alunos (13.5%)
+  ainda com plano em set/26: 93.5% | passaram na catraca como Ativo: 78.0% (negativos: 83.1%)
+
+======== D. Viés de sobrevivência e coortes estimadas pela numeração ========
+alunos com plano por mês: {Period('2024-10', 'M'): 205, Period('2024-11', 'M'): 427, Period('2025-04', 'M'): 502, Period('2025-10', 'M'): 597, Period('2026-04', 'M'): 894, Period('2026-09', 'M'): 1153}
+último mês de cobertura: {Period('2025-08', 'M'): 1, Period('2025-12', 'M'): 2, Period('2026-01', 'M'): 4, Period('2026-02', 'M'): 2, Period('2026-05', 'M'): 2, Period('2026-06', 'M'): 6, Period('2026-07', 'M'): 15, Period('2026-08', 'M'): 9, Period('2026-09', 'M'): 564, Period('2026-10', 'M'): 638}
+         emitidos  count  pct_de_clientes_atuais
+m                                               
+2024-11       530    149                    0.28
+2024-12       142     82                    0.58
+2025-01       213     73                    0.34
+2025-02       178     38                    0.21
+2025-03       163     40                    0.25
+2025-04       181     51                    0.28
+2025-05       193     53                    0.27
+2025-06       204     61                     0.3
+2025-07       286     80                    0.28
+2025-08       171     69                     0.4
+2025-09       215     66                    0.31
+2025-10       201     57                    0.28
+2025-11       374    184                    0.49
+2025-12       228    150                    0.66
+2026-01       256    139                    0.54
+2026-02       156     83                    0.53
+2026-03       184     99                    0.54
+2026-04       214    133                    0.62
+2026-05       137     98                    0.72
+2026-06       147    108                    0.73
+2026-07       193    165                    0.85
+2026-08       124    104                    0.84
+2026-09       136    106                    0.78
+2026-10        66     57                    0.86
+                    matriculas_emitidas  ainda_ativas    pct
+trimestre_cadastro                                          
+2024Q1                              357            22  0.062
+2024Q2                              260            27  0.104
+2024Q3                              267            24  0.090
+2024Q4                              340            60  0.176
+2025Q1                              280            27  0.096
+2025Q2                              286            35  0.122
+2025Q3                              284            46  0.162
+2025Q4                              345            71  0.206
+2026Q1                              315            95  0.302
+2026Q2                              247            87  0.352
+2026Q3                              208            88  0.423
+2026Q4                               11             5  0.455
+
+======== E. Transições de plano e retornos ========
+para              Bolsa  Cross  Gold  ...  Natação/Hidro  Promo (BF/Natal)  All
+de                                    ...                                      
+Bolsa                 1      0     0  ...              0                 0    2
+Cross                 0      2     1  ...              0                 0    4
+Gold                  2      0   282  ...              4                12  319
+Gold + extra          0      1    17  ...              8                 1   52
+Horário especial      1      0     6  ...              0                 0   36
+Natação/Hidro         0      0    10  ...            217                 0  247
+Promo (BF/Natal)      0      1    94  ...              1                29  128
+All                   4      4   410  ...            230                42  788
+
+[8 rows x 9 columns]
+trocas com cancelamento que repetem o plano exato: 11%
+alunos ativos que já ficaram >=2 meses sem plano e voltaram: 282 de 1243 (23%) | lacuna de 1 mês: 278
+
+======== F. Receita, preço e meios de pagamento ========
+set/26: 1111 alunos faturados | R$ 188,185 | ticket médio R$ 169.38 | em aberto: 66 parcelas
+                                                  alunos  ...  precos_distintos
+Plano                                                     ...                  
+PLANO GOLD (RECORRENCIA)                             447  ...                14
+PLANO NATACAO OU HIDROGINASTICA 1X 2X 3X             129  ...                31
+PLANO NATACAO OU HIDROGINASTICA 3X (RECORRENCIA)     101  ...                 5
+PLANO GOLD                                           100  ...                24
+GOLD RECORRENCIA 9, 90                                90  ...                 2
+PLANO GOLD BLACK FRIDAY 2025                          82  ...                 1
+PLANO NATACAO OU HIDROGINASTICA 2X (RECORRENCIA)      59  ...                 5
+PLANO GOLD + NATAÇÃO OU HIDRO 3X                      21  ...                10
+
+[8 rows x 5 columns]
+vendas avulsas pagas, média mensal out/25-set/26: R$ 5,200 (min 2,441, max 8,098)
+parcelas de planos recorrentes pagas por: {'CARTÃO RECORRENTE': 0.709, 'PIX': 0.124, 'CARTÃO DE CRÉDITO': 0.116, 'CARTÃO DE DÉBITO': 0.031}
+em aberto: 202 parcelas | 128 alunos | R$ 32,615.05 | atraso mediano 18 dias | no convênio de recorrência: 94%
+
+======== G. Cobrança recorrente (cartão) ========
+horário das tentativas: {12: 4292, 22: 36, 11: 4}
+cartão-mês: 1809 | aprovou no mês: 66.6% | nunca aprovou no mês: 604
+recusas: 3050 | em cartões que nunca aprovaram na janela: 2621 | cartões que nunca aprovaram: 238
+cartões com >15 recusas em 30 dias: 37 | >10: 78
+               casos  taxa_recuperacao
+codigoRetorno                         
+51               283             0.230
+Pac014           232             0.004
+62                42             0.119
+79                21             0.000
+Pac003            20             0.000
+82                18             0.000
+83                12             0.333
+5c                11             0.000
+46                 9             0.000
+       tentativas  taxa_aprovacao
+faixa                            
+1-4           113           0.035
+5-7            79           0.038
+8-9            64           0.094
+10-11          60           0.200
+12-14          92           0.174
+15-16          43           0.093
+17-19          87           0.126
+20-24         165           0.055
+25-27          90           0.078
+28-31         109           0.064
+aprovação por 1º dígito do cartão: {'2': 0.14, '3': 0.39, '4': 0.34, '5': 0.3, '6': 0.25}
+BINs com mais tentativas: aprovação de 2% a 46%
+
+======== H. Acessos (catraca) ========
+visitas: 8313 em 27 dias | frequência mensal mediana 7 dias (p25 4, p75 10)
+alunos com plano em set/26: 1153 | zero acessos no mês: 193 (16.7%) | 1-2 acessos: 125
+                  alunos  mediana  pct_zero
+familia                                    
+Bolsa                  5     10.0      0.20
+Cross                  3      8.0      0.00
+Gold                 647      7.0      0.19
+Gold + extra          68      8.0      0.16
+Horário especial      17      9.0      0.18
+Lutas/avulsa           2      7.5      0.00
+Natação/Hidro        309      5.0      0.08
+Promo (BF/Natal)     102      3.5      0.31
+Horário especial (11h-16h): 24% das visitas fora da faixa (n=155)
+tipos de acesso: {'Contrato Ativo': 8405, 'Retorno - Férias': 507, 'Retorno - Atestado': 235, 'Bônus': 36}
+           freq_2_semanas  dias_sem_vir
+sit                                    
+Ativo                 3.7           5.0
+Inativo               3.5          13.5
+Visitante             0.0           0.0
+na catraca mas fora do export de parcelas: 56 (Inativo: 54)

@@ -1,0 +1,90 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='760' height='340' viewBox='0 0 760 340' font-family='system-ui,-apple-system,Segoe UI,Roboto,sans-serif'>
+<rect width='760' height='340' fill='#fcfcfb' rx='8'/>
+<text x='20' y='28' font-size='15' font-weight='600' fill='#0b0b0b'>% dos contratos emitidos no mês cujo titular ainda é cliente</text>
+<text x='20' y='47' font-size='12' fill='#52514e'>Estimado pela numeração sequencial de contratos (ID emitidos vs. visíveis)</text>
+<line x1='60' x2='730' y1='280.0' y2='280.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='284.0' font-size='11' fill='#898781' text-anchor='end'>0</text>
+<line x1='60' x2='730' y1='239.0' y2='239.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='243.0' font-size='11' fill='#898781' text-anchor='end'>20</text>
+<line x1='60' x2='730' y1='198.0' y2='198.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='202.0' font-size='11' fill='#898781' text-anchor='end'>40</text>
+<line x1='60' x2='730' y1='157.0' y2='157.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='161.0' font-size='11' fill='#898781' text-anchor='end'>60</text>
+<line x1='60' x2='730' y1='116.0' y2='116.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='120.0' font-size='11' fill='#898781' text-anchor='end'>80</text>
+<line x1='60' x2='730' y1='75.0' y2='75.0' stroke='#e6e5e0' stroke-width='1'/>
+<text x='52' y='79.0' font-size='11' fill='#898781' text-anchor='end'>100</text>
+<text x='52' y='63' font-size='11' fill='#898781' text-anchor='end'>%</text>
+<path d='M61.0,280 L61.0,226.6 Q61.0,222.6 65.0,222.6 L82.9,222.6 Q86.9,222.6 86.9,226.6 L86.9,280 Z' fill='#2a78d6'><title>2024-11: 28%</title></path>
+<text x='74.0' y='216.6' font-size='11' fill='#0b0b0b' text-anchor='middle'>28%</text>
+<text x='74.0' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2024-11</text>
+<path d='M88.9,280 L88.9,165.1 Q88.9,161.1 92.9,161.1 L110.8,161.1 Q114.8,161.1 114.8,165.1 L114.8,280 Z' fill='#2a78d6'><title>2024-12: 58%</title></path>
+<text x='101.9' y='155.1' font-size='11' fill='#0b0b0b' text-anchor='middle'>58%</text>
+<text x='101.9' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2024-12</text>
+<path d='M116.8,280 L116.8,214.3 Q116.8,210.3 120.8,210.3 L138.8,210.3 Q142.8,210.3 142.8,214.3 L142.8,280 Z' fill='#2a78d6'><title>2025-01: 34%</title></path>
+<text x='129.8' y='204.3' font-size='11' fill='#0b0b0b' text-anchor='middle'>34%</text>
+<text x='129.8' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-01</text>
+<path d='M144.8,280 L144.8,240.9 Q144.8,236.9 148.8,236.9 L166.7,236.9 Q170.7,236.9 170.7,240.9 L170.7,280 Z' fill='#2a78d6'><title>2025-02: 21%</title></path>
+<text x='157.7' y='230.9' font-size='11' fill='#0b0b0b' text-anchor='middle'>21%</text>
+<text x='157.7' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-02</text>
+<path d='M172.7,280 L172.7,232.8 Q172.7,228.8 176.7,228.8 L194.6,228.8 Q198.6,228.8 198.6,232.8 L198.6,280 Z' fill='#2a78d6'><title>2025-03: 25%</title></path>
+<text x='185.6' y='222.8' font-size='11' fill='#0b0b0b' text-anchor='middle'>25%</text>
+<text x='185.6' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-03</text>
+<path d='M200.6,280 L200.6,226.6 Q200.6,222.6 204.6,222.6 L222.5,222.6 Q226.5,222.6 226.5,226.6 L226.5,280 Z' fill='#2a78d6'><title>2025-04: 28%</title></path>
+<text x='213.5' y='216.6' font-size='11' fill='#0b0b0b' text-anchor='middle'>28%</text>
+<text x='213.5' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-04</text>
+<path d='M228.5,280 L228.5,228.7 Q228.5,224.7 232.5,224.7 L250.4,224.7 Q254.4,224.7 254.4,228.7 L254.4,280 Z' fill='#2a78d6'><title>2025-05: 27%</title></path>
+<text x='241.5' y='218.7' font-size='11' fill='#0b0b0b' text-anchor='middle'>27%</text>
+<text x='241.5' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-05</text>
+<path d='M256.4,280 L256.4,222.5 Q256.4,218.5 260.4,218.5 L278.3,218.5 Q282.3,218.5 282.3,222.5 L282.3,280 Z' fill='#2a78d6'><title>2025-06: 30%</title></path>
+<text x='269.4' y='212.5' font-size='11' fill='#0b0b0b' text-anchor='middle'>30%</text>
+<text x='269.4' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-06</text>
+<path d='M284.3,280 L284.3,226.6 Q284.3,222.6 288.3,222.6 L306.2,222.6 Q310.2,222.6 310.2,226.6 L310.2,280 Z' fill='#2a78d6'><title>2025-07: 28%</title></path>
+<text x='297.3' y='216.6' font-size='11' fill='#0b0b0b' text-anchor='middle'>28%</text>
+<text x='297.3' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-07</text>
+<path d='M312.3,280 L312.3,202.0 Q312.3,198.0 316.3,198.0 L334.2,198.0 Q338.2,198.0 338.2,202.0 L338.2,280 Z' fill='#2a78d6'><title>2025-08: 40%</title></path>
+<text x='325.2' y='192.0' font-size='11' fill='#0b0b0b' text-anchor='middle'>40%</text>
+<text x='325.2' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-08</text>
+<path d='M340.2,280 L340.2,220.4 Q340.2,216.4 344.2,216.4 L362.1,216.4 Q366.1,216.4 366.1,220.4 L366.1,280 Z' fill='#2a78d6'><title>2025-09: 31%</title></path>
+<text x='353.1' y='210.4' font-size='11' fill='#0b0b0b' text-anchor='middle'>31%</text>
+<text x='353.1' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-09</text>
+<path d='M368.1,280 L368.1,226.6 Q368.1,222.6 372.1,222.6 L390.0,222.6 Q394.0,222.6 394.0,226.6 L394.0,280 Z' fill='#2a78d6'><title>2025-10: 28%</title></path>
+<text x='381.0' y='216.6' font-size='11' fill='#0b0b0b' text-anchor='middle'>28%</text>
+<text x='381.0' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-10</text>
+<path d='M396.0,280 L396.0,183.6 Q396.0,179.6 400.0,179.6 L417.9,179.6 Q421.9,179.6 421.9,183.6 L421.9,280 Z' fill='#2a78d6'><title>2025-11: 49%</title></path>
+<text x='409.0' y='173.6' font-size='11' fill='#0b0b0b' text-anchor='middle'>49%</text>
+<text x='409.0' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-11</text>
+<path d='M423.9,280 L423.9,148.7 Q423.9,144.7 427.9,144.7 L445.8,144.7 Q449.8,144.7 449.8,148.7 L449.8,280 Z' fill='#2a78d6'><title>2025-12: 66%</title></path>
+<text x='436.9' y='138.7' font-size='11' fill='#0b0b0b' text-anchor='middle'>66%</text>
+<text x='436.9' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2025-12</text>
+<path d='M451.8,280 L451.8,173.3 Q451.8,169.3 455.8,169.3 L473.8,169.3 Q477.8,169.3 477.8,173.3 L477.8,280 Z' fill='#2a78d6'><title>2026-01: 54%</title></path>
+<text x='464.8' y='163.3' font-size='11' fill='#0b0b0b' text-anchor='middle'>54%</text>
+<text x='464.8' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-01</text>
+<path d='M479.8,280 L479.8,175.3 Q479.8,171.3 483.8,171.3 L501.7,171.3 Q505.7,171.3 505.7,175.3 L505.7,280 Z' fill='#2a78d6'><title>2026-02: 53%</title></path>
+<text x='492.7' y='165.3' font-size='11' fill='#0b0b0b' text-anchor='middle'>53%</text>
+<text x='492.7' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-02</text>
+<path d='M507.7,280 L507.7,173.3 Q507.7,169.3 511.7,169.3 L529.6,169.3 Q533.6,169.3 533.6,173.3 L533.6,280 Z' fill='#2a78d6'><title>2026-03: 54%</title></path>
+<text x='520.6' y='163.3' font-size='11' fill='#0b0b0b' text-anchor='middle'>54%</text>
+<text x='520.6' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-03</text>
+<path d='M535.6,280 L535.6,156.9 Q535.6,152.9 539.6,152.9 L557.5,152.9 Q561.5,152.9 561.5,156.9 L561.5,280 Z' fill='#2a78d6'><title>2026-04: 62%</title></path>
+<text x='548.5' y='146.9' font-size='11' fill='#0b0b0b' text-anchor='middle'>62%</text>
+<text x='548.5' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-04</text>
+<path d='M563.5,280 L563.5,136.4 Q563.5,132.4 567.5,132.4 L585.4,132.4 Q589.4,132.4 589.4,136.4 L589.4,280 Z' fill='#2a78d6'><title>2026-05: 72%</title></path>
+<text x='576.5' y='126.4' font-size='11' fill='#0b0b0b' text-anchor='middle'>72%</text>
+<text x='576.5' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-05</text>
+<path d='M591.4,280 L591.4,134.3 Q591.4,130.3 595.4,130.3 L613.3,130.3 Q617.3,130.3 617.3,134.3 L617.3,280 Z' fill='#2a78d6'><title>2026-06: 73%</title></path>
+<text x='604.4' y='124.3' font-size='11' fill='#0b0b0b' text-anchor='middle'>73%</text>
+<text x='604.4' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-06</text>
+<path d='M619.3,280 L619.3,109.8 Q619.3,105.8 623.3,105.8 L641.3,105.8 Q645.3,105.8 645.3,109.8 L645.3,280 Z' fill='#2a78d6'><title>2026-07: 85%</title></path>
+<text x='632.3' y='99.8' font-size='11' fill='#0b0b0b' text-anchor='middle'>85%</text>
+<text x='632.3' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-07</text>
+<path d='M647.2,280 L647.2,111.8 Q647.2,107.8 651.2,107.8 L669.2,107.8 Q673.2,107.8 673.2,111.8 L673.2,280 Z' fill='#2a78d6'><title>2026-08: 84%</title></path>
+<text x='660.2' y='101.8' font-size='11' fill='#0b0b0b' text-anchor='middle'>84%</text>
+<text x='660.2' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-08</text>
+<path d='M675.2,280 L675.2,124.1 Q675.2,120.1 679.2,120.1 L697.1,120.1 Q701.1,120.1 701.1,124.1 L701.1,280 Z' fill='#2a78d6'><title>2026-09: 78%</title></path>
+<text x='688.1' y='114.1' font-size='11' fill='#0b0b0b' text-anchor='middle'>78%</text>
+<text x='688.1' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-09</text>
+<path d='M703.1,280 L703.1,107.7 Q703.1,103.7 707.1,103.7 L725.0,103.7 Q729.0,103.7 729.0,107.7 L729.0,280 Z' fill='#2a78d6'><title>2026-10: 86%</title></path>
+<text x='716.0' y='97.7' font-size='11' fill='#0b0b0b' text-anchor='middle'>86%</text>
+<text x='716.0' y='296' font-size='11' fill='#52514e' text-anchor='middle'>2026-10</text>
+</svg>
