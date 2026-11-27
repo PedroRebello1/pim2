@@ -28,7 +28,7 @@ Próximos passos: re-treinar quando chegarem mais meses de transações, propor 
 - Antes de cada commit, procurar nomes de alunos ou titulares no diff. O nome "Guilherme" na capa dos slides é de um integrante do grupo, não é vazamento.
 - Os exports brutos e o código antigo do PIM I ficam no repositório **privado** `PedroRebello1/pim2dev1`. Nunca enviar aquele histórico para este repositório.
 - Nos materiais do grupo (pitch, slides, READMEs), não falar de repositórios anteriores nem do manuseio dos dados brutos. O grupo considera o assunto resolvido.
-- Tudo fica dentro desta pasta (`ap2/`, raiz do git), porque as sessões do Claude Code são abertas aqui.
+- Tudo fica dentro desta pasta (a raiz do git), porque as sessões do Claude Code são abertas aqui.
 - Commit e push só quando o usuário pedir.
 
 ## Armadilhas dos dados (checar a cada novo export)
@@ -74,9 +74,12 @@ python scripts/02_vincular_transacoes.py <pasta_cache>
 python scripts/03_analises.py <pasta_cache>        # gera saidas/
 python scripts/04_pitch_pdf.py                     # gera Pitch_Tecnico_PIM2.pdf a partir de saidas/
 
-# Solução
+# Solução (a pasta privada precisa ficar fora do repo; --resultados <pasta> grava os agregados em outro lugar)
 cd solucao_pim2/motor_cobranca && python rodar.py <pasta_exports> <pasta_privada>
 cd ../slides && python gerar_slides.py             # gera apresentacao.html e apresentacao.pdf
+
+# Testes (dados sintéticos; não precisam dos exports)
+python -m pytest
 ```
 
 O carregador do motor reconhece cada xlsx pelo cabeçalho, então novos exports entram sem mudar o código.
@@ -87,7 +90,7 @@ O pitch e os slides são gerados a partir dos CSVs. **Os números escritos à m�
 
 - Windows 11, com Python 3.15.1, pandas 3.1, numpy 2.5 e openpyxl.
 - **Sem scikit-learn e sem scipy:** tudo foi implementado em numpy.
-- Os PDFs são gerados pelo Edge headless (`--print-to-pdf --no-pdf-header-footer`). O caminho do Edge está fixo na variável `EDGE` de `scripts/04_pitch_pdf.py` e de `solucao_pim2/slides/gerar_slides.py`. Em outra máquina, ajustar.
+- Os PDFs do pitch e dos slides são gerados pelo Edge ou pelo Chrome headless (`--print-to-pdf --no-pdf-header-footer`). A função `navegador()` de `scripts/04_pitch_pdf.py` e de `solucao_pim2/slides/gerar_slides.py` procura o navegador no Windows, no macOS e no Linux; a variável de ambiente `NAVEGADOR` tem prioridade.
 - Para revisar o layout, renderizar as páginas do PDF em PNG com pymupdf e olhar.
 - Se chamar o Edge pelo Bash falhar, usar `Start-Process` no PowerShell.
 
@@ -102,7 +105,8 @@ O pitch e os slides são gerados a partir dos CSVs. **Os números escritos à m�
 
 - Segue o modelo do professor (`Professor-Weslley/pi-abnt`, feito em Quarto + R), adaptado para Word e PDF gerados em Python no VS Code. Entrega: PDF no Moodle + link do repositório e da release `entrega-final` (passo a passo em `ENTREGA.md`). Prazo: Turma B 02/12, Turma A 04/12, até 23:59.
 - O texto fica em `relatorio_pi.md` (Markdown com os atalhos do modelo: `{.pre}`, `{.pos}`, `::: fonte`, `::: listas`, `{#refs}`, `@fig-`, `@tbl-`, `@sec-`, `@eq-`, `[@chave]`) e as referências em `refs.bib`.
-- `python relatorio/gerar_relatorio.py` (ou Ctrl+Shift+B) gera `relatorio_pi.docx` e `relatorio_pi.pdf`. O PDF sai pelo LibreOffice (`--conversor word` usa o Word via docx2pdf). São duas passadas: converte, lê no PDF a página de cada título e legenda e preenche o sumário e as listas.
+- `python relatorio/gerar_relatorio.py` (ou Ctrl+Shift+B) gera `relatorio_pi.docx` e `relatorio_pi.pdf`. O PDF sai pelo LibreOffice (`--conversor word` usa o Word via docx2pdf). São duas passadas: converte, lê no PDF a página de cada título e legenda e preenche o sumário e as listas. Sem PDF (`--sem-pdf` ou sem conversor), sai só a prévia `relatorio_pi_previa.docx` (ignorada pelo git), e o relatório final não é alterado.
+- Testes em `testes/` (`python -m pytest`, uns 10 s): motor com dados sintéticos (`testes/sinteticos.py`), gerador do relatório e montagem do `relatorio_pi.md` real. O GitHub Actions roda os testes num job separado.
 - Números do texto só por `{{nome}}`, calculados em `relatorio/valores.py` a partir de `saidas/` (CSVs e `log_03_analises.txt`) e de `solucao_pim2/resultados/`. Ao rodar o estudo de novo, gravar o log: `python -X utf8 scripts/03_analises.py <pasta_cache> > saidas/log_03_analises.txt`.
 - Gráficos em `relatorio/figuras.py` e tabelas em `relatorio/tabelas.py`. `relatorio/abnt/` é o padrão ABNT em Word (inclui o `padrao.py` do professor, que não deve ser alterado): não mexer sem motivo.
 - O GitHub Actions (`.github/workflows/render.yml`) gera o relatório a cada push e publica o artefato `relatorio-pdf`.

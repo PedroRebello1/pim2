@@ -6,14 +6,18 @@
 *.parquet
 data/
 cache*/
+# Fila do dia com o nome do titular (o motor grava numa pasta privada, fora do repositório)
+fila_do_dia*.csv
 
 # Python
 __pycache__/
 *.pyc
 .venv/
 
-# Relatório: arquivos temporários do gerador e do Word/LibreOffice
+# Relatório: prévia rápida (--sem-pdf) e arquivos temporários do gerador e do Word/LibreOffice
+*_previa.docx
 relatorio/_build/
+.pytest_cache/
 ~$*.docx
 .~lock.*#
 
