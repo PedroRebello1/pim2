@@ -1,0 +1,5 @@
+{
+  "files.encoding": "utf8",
+  "[markdown]": { "editor.wordWrap": "on" },
+  "files.exclude": { "relatorio/_build": true, "**/__pycache__": true }
+}
