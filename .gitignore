@@ -11,3 +11,13 @@ cache*/
 __pycache__/
 *.pyc
 .venv/
+
+# Relatório: arquivos temporários do gerador e do Word/LibreOffice
+relatorio/_build/
+~$*.docx
+.~lock.*#
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,36 @@
+{
+  // Ctrl+Shift+B gera o relatório (equivale ao botão Render do RStudio no modelo do professor).
+  // Usa o Python selecionado no VS Code (canto inferior direito ou Ctrl+Shift+P > "Python: Select Interpreter").
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Gerar relatório (Word + PDF)",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": ["relatorio/gerar_relatorio.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Gerar relatório (só Word, mais rápido)",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": ["relatorio/gerar_relatorio.py", "--sem-pdf"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Mostrar os números do texto ({{...}})",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": ["relatorio/valores.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+      "problemMatcher": []
+    }
+  ]
+}

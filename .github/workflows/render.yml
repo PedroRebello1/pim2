@@ -1,0 +1,47 @@
+# Gera o relatório (Word e PDF) a cada push e disponibiliza para download
+# na aba "Actions" do repositório (seção "Artifacts"). Se a execução fica
+# verde, o relatório sai do zero numa máquina limpa, só com o que está no
+# repositório: é a prova de reprodutibilidade pedida na entrega.
+name: Gerar relatório
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Fontes Microsoft (Times New Roman)
+        run: |
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install -y ttf-mscorefonts-installer fontconfig
+          sudo fc-cache -f
+
+      - name: LibreOffice (converte o Word em PDF)
+        run: sudo apt-get install -y --no-install-recommends libreoffice-writer
+
+      - name: Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Pacotes Python
+        run: pip install -r requirements.txt
+
+      - name: Gerar relatório
+        run: python relatorio/gerar_relatorio.py
+
+      - name: Publicar Word e PDF
+        uses: actions/upload-artifact@v5
+        with:
+          name: relatorio-pdf
+          path: |
+            relatorio_pi.pdf
+            relatorio_pi.docx
