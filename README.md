@@ -34,8 +34,9 @@ O relatório é gerado só com os resultados agregados que estão no repositóri
 | `dados/` | Explica por que os dados brutos não estão no repositório | Não |
 | `scripts/`, `saidas/` | Estudo dos dados e seus resultados agregados | Sim, com dados novos |
 | `solucao_pim2/` | Motor de Cobrança Inteligente, resultados e slides | Sim, com dados novos |
-| `.github/workflows/render.yml` | Gera o relatório no GitHub a cada push | **Não** |
-| `.vscode/` | Tarefa "Gerar relatório" do VS Code (Ctrl+Shift+B) | Não |
+| `testes/` | Testes automáticos do motor e do gerador do relatório (`python -m pytest`) | Sim, ao mudar o código |
+| `.github/workflows/render.yml` | Gera o relatório e roda os testes no GitHub a cada push | **Não** |
+| `.vscode/` | Tarefas do VS Code: gerar o relatório (Ctrl+Shift+B), prévia em Word e testes | Não |
 
 ## Escrevendo o relatório
 
@@ -139,17 +140,29 @@ Instale Python, VS Code, Git (`xcode-select --install`) e LibreOffice. Os comand
 
 - **No VS Code:** **Ctrl+Shift+B** (tarefa *Gerar relatório*). É o equivalente ao botão Render do RStudio.
 - **No terminal:** `python relatorio/gerar_relatorio.py` (na raiz do repositório). Saem o `relatorio_pi.docx` e o `relatorio_pi.pdf`.
-  - `--sem-pdf` gera só o Word, mais rápido, sem paginar o sumário.
+  - `--sem-pdf` gera só uma prévia em Word, `relatorio_pi_previa.docx`, mais rápida e sem os números de página do sumário (saem como 00). Ela não vai para o GitHub e não mexe no `relatorio_pi.docx` nem no `relatorio_pi.pdf`, que só mudam numa geração completa.
 - **No GitHub:** a cada `push`, o GitHub Actions gera o relatório numa máquina limpa. Para baixar, vá na aba **Actions**, abra a execução mais recente e baixe **relatorio-pdf** em *Artifacts* (vem o PDF e o Word).
   - Se a execução ficar vermelha (❌), o relatório tem erro: clique nela para ver a mensagem.
 
 O sumário e as listas de figuras e tabelas são campos do Word já preenchidos: o gerador converte o documento, confere em que página ficou cada título e monta de novo com os números certos. Se alguém editar o `.docx` direto no Word e as páginas mudarem, clique no sumário e aperte **F9** (Atualizar o índice inteiro). O caminho recomendado, porém, é editar o `relatorio_pi.md` e gerar de novo.
+
+## Testes
+
+```bash
+pip install pytest
+python -m pytest
+```
+
+Os testes (pasta `testes/`) levam uns 10 segundos e não precisam dos dados da academia: usam tentativas de cobrança sintéticas, no formato do export. Eles conferem os atributos de cada tentativa, o ajuste da regressão logística e as métricas, as regras e a fila do motor, o motor completo de ponta a ponta (inclusive que os resultados versionados não trazem nome nem cartão), a leitura do Markdown, as citações e referências ABNT e a montagem do relatório. No GitHub, eles rodam a cada push, ao lado da geração do relatório.
 
 ## Reproduzir o estudo e o motor de cobrança
 
 Precisa dos exports brutos da academia, que ficam fora do repositório. Os comandos estão em [dados/README.md](dados/README.md).
 Depois de rodar com dados novos, gere o relatório de novo: os números, as tabelas e os gráficos se atualizam sozinhos.
 Os textos escritos à mão no `ESTUDO_DADOS_E_OPORTUNIDADES.md` e no `solucao_pim2/README.md` continuam precisando de atualização manual.
+
+- O motor (`rodar.py`) se recusa a gravar a fila do dia, que traz o nome do titular, dentro do repositório: a pasta privada precisa ficar fora dele.
+- O pitch (`scripts/04_pitch_pdf.py`) e os slides (`solucao_pim2/slides/gerar_slides.py`) usam o Edge ou o Chrome para gerar o PDF, no Windows, no macOS ou no Linux. Se nenhum for encontrado, informe o caminho do navegador na variável de ambiente `NAVEGADOR`.
 
 ## Problemas comuns
 
@@ -164,5 +177,7 @@ Os textos escritos à mão no `ESTUDO_DADOS_E_OPORTUNIDADES.md` e no `solucao_pi
 | `ERRO: A figura @fig-x não existe em relatorio/figuras.py` | Crie a função com `@figura("fig-x")`. O mesmo vale para tabelas (`@tabela("tbl-x")`). |
 | Aviso `falta o bloco '::: fonte'` ou `não é citada no texto` | Acrescente o `::: fonte` abaixo da figura/tabela e cite-a com `@fig-...`/`@tbl-...`. |
 | Sumário com páginas erradas depois de editar no Word | Clique no sumário e aperte F9, ou gere de novo pelo script. |
-| Funciona no seu computador, mas fica ❌ no GitHub | Falta pacote no `requirements.txt`, ou um arquivo de resultados não foi enviado (confira `saidas/` e `solucao_pim2/resultados/`). |
+| Funciona no seu computador, mas fica ❌ no GitHub | Falta pacote no `requirements.txt`, ou um arquivo de resultados não foi enviado (confira `saidas/` e `solucao_pim2/resultados/`). Se o ❌ for no job *testes*, rode `python -m pytest` para ver qual teste falhou. |
+| `a pasta privada precisa ficar fora do repositório` (motor) | Passe ao `rodar.py` uma pasta fora do repositório para a fila do dia, por exemplo `C:\academia\privado`. |
+| `Não achei o Edge nem o Chrome` (pitch ou slides) | Instale um deles ou informe o caminho do executável na variável de ambiente `NAVEGADOR`. |
 | Erro em caminho com acento, espaço ou `OneDrive` | Guarde o repositório em `C:\projetos\pim2`. |

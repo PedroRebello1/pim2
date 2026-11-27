@@ -5,7 +5,10 @@ Navegação no HTML: setas / espaço / PgUp-PgDn; F = tela cheia.
 """
 import json
 import math
+import os
+import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -13,7 +16,30 @@ import pandas as pd
 AQUI = Path(__file__).resolve().parent
 RES = AQUI.parent / "resultados"
 ESTUDO = AQUI.parent.parent / "saidas"
-EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+
+
+def navegador() -> str:
+    """Edge ou Chrome (modo headless) para imprimir o HTML em PDF, no Windows, no macOS ou no Linux.
+
+    Se a variável de ambiente NAVEGADOR existir, o caminho dela tem prioridade."""
+    local = os.environ.get("LOCALAPPDATA", "")
+    candidatos = [
+        os.environ.get("NAVEGADOR"),
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        os.path.join(local, "Google", "Chrome", "Application", "chrome.exe") if local else None,
+        "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        *(shutil.which(n) for n in ("msedge", "microsoft-edge", "google-chrome", "chromium", "chromium-browser")),
+    ]
+    for c in candidatos:
+        if c and Path(c).exists():
+            return str(c)
+    sys.exit("Não achei o Edge nem o Chrome para gerar o PDF. Instale um deles ou informe o caminho do "
+             "executável na variável de ambiente NAVEGADOR.")
+
 
 m = json.loads((RES / "metricas.json").read_text(encoding="utf-8"))
 pol = pd.read_csv(RES / "politicas_teste.csv")
@@ -437,6 +463,6 @@ html = (f"<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><meta na
 saida_html = AQUI / "apresentacao.html"
 saida_html.write_text(html, encoding="utf-8")
 saida_pdf = AQUI / "apresentacao.pdf"
-subprocess.run([str(EDGE), "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={saida_pdf}",
+subprocess.run([navegador(), "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={saida_pdf}",
                 saida_html.as_uri()], check=True, timeout=120)
 print("HTML:", saida_html, "| PDF:", saida_pdf, saida_pdf.stat().st_size, "bytes")

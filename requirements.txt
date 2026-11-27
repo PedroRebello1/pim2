@@ -1,16 +1,20 @@
 # Pacotes Python do projeto. O GitHub Actions instala daqui para gerar o relatório,
-# então todo pacote usado precisa estar nesta lista.
+# então todo pacote usado precisa estar nesta lista. O limite "<" de cada pacote impede que
+# uma versão nova, com mudanças incompatíveis, quebre a geração do relatório sem aviso.
 
 # Estudo dos dados (scripts/) e Motor de Cobrança (solucao_pim2/)
-pandas
-numpy
-openpyxl
+pandas<4
+numpy<3
+openpyxl<4
 
 # Relatório final em Word e PDF (relatorio/)
-matplotlib
-python-docx>=1.1
-pyyaml
-pypdf>=4
+matplotlib<4
+pillow<14
+python-docx>=1.1,<2
+pyyaml<7
+pypdf>=4,<8
 
 # Opcional: gerar o PDF pelo Microsoft Word em vez do LibreOffice (Windows/macOS)
 # docx2pdf
+
+# Testes automáticos (pasta testes/): pip install pytest; depois, python -m pytest

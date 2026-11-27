@@ -1,10 +1,13 @@
-"""Gera o pitch técnico em PDF (HTML de impressão -> PDF via Edge headless).
+"""Gera o pitch técnico em PDF (HTML de impressão -> PDF via Edge ou Chrome headless).
 
 Lê só os agregados de ../saidas/ (gerados pelo 03_analises.py), então os números do pitch são os
 mesmos do estudo. Saídas: ../pitch/pitch_tecnico.html e ../Pitch_Tecnico_PIM2.pdf
 Uso: python 04_pitch_pdf.py
 """
+import os
+import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -13,7 +16,30 @@ BASE = Path(__file__).resolve().parent.parent
 SAIDAS = BASE / "saidas"
 HTML = BASE / "pitch" / "pitch_tecnico.html"
 PDF = BASE / "Pitch_Tecnico_PIM2.pdf"
-EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+
+
+def navegador() -> str:
+    """Edge ou Chrome (modo headless) para imprimir o HTML em PDF, no Windows, no macOS ou no Linux.
+
+    Se a variável de ambiente NAVEGADOR existir, o caminho dela tem prioridade."""
+    local = os.environ.get("LOCALAPPDATA", "")
+    candidatos = [
+        os.environ.get("NAVEGADOR"),
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        os.path.join(local, "Google", "Chrome", "Application", "chrome.exe") if local else None,
+        "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        *(shutil.which(n) for n in ("msedge", "microsoft-edge", "google-chrome", "chromium", "chromium-browser")),
+    ]
+    for c in candidatos:
+        if c and Path(c).exists():
+            return str(c)
+    sys.exit("Não achei o Edge nem o Chrome para gerar o PDF. Instale um deles ou informe o caminho do "
+             "executável na variável de ambiente NAVEGADOR.")
+
 
 rec = pd.read_csv(SAIDAS / "G_recuperacao_por_codigo_primeira_recusa.csv", encoding="utf-8-sig")
 dia = pd.read_csv(SAIDAS / "G_retentativa_apos_51_por_dia_do_mes.csv", encoding="utf-8-sig")
@@ -344,6 +370,6 @@ Janelas analisadas: parcelas com vencimento entre 15/10/2024 e 15/10/2026; catra
 HTML.parent.mkdir(exist_ok=True)
 HTML.write_text(f"<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><title>Pitch técnico PIM II</title>"
                 f"<style>{CSS}</style></head><body>{BODY}</body></html>", encoding="utf-8")
-subprocess.run([str(EDGE), "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+subprocess.run([navegador(), "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
                 f"--print-to-pdf={PDF}", HTML.as_uri()], check=True, timeout=120)
 print("PDF:", PDF, PDF.stat().st_size, "bytes")

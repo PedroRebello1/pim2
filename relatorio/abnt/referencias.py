@@ -215,7 +215,9 @@ class Bibliografia:
         return out
 
     def referencia(self, chave: str) -> list[tuple[str, frozenset]]:
-        o = self.obras[chave]
+        # chaves que protegem maiúsculas no BibTeX ({ABECS}, {B}ayesian) não aparecem na referência;
+        # o autor fica como está, porque {BRASIL} indica autor institucional
+        o = {k: (v if k == "author" else _sem_chaves(v)) for k, v in self.obras[chave].items()}
         tipo = o["tipo"]
         ano = o.get("yeardisplay", o.get("year", "[s. d.]")) + self._sufixo.get(chave, "")
         out = self._autoria(o)

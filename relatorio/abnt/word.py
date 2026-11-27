@@ -36,6 +36,10 @@ FONTE_CODIGO = "Courier New"
 LARGURA_UTIL_CM = 16.0          # 21 cm - 3 cm - 2 cm
 ALTURA_UTIL_CM = 24.7           # 29,7 cm - 3 cm - 2 cm
 PEQUENA = 10                    # letra menor (legendas, fontes, citações longas, tabelas, paginação)
+TAMANHO_CODIGO = 7.5            # blocos de código (Apêndice)
+# Caracteres por linha de código: o Courier New tem largura fixa de 0,6 em (4,5 pt a 7,5 pt), então
+# cabem 100 na largura útil; 2 de folga para o Word e o LibreOffice não quebrarem a linha sozinhos.
+LARGURA_CODIGO = int(LARGURA_UTIL_CM / 2.54 * 72 / (0.6 * TAMANHO_CODIGO)) - 2
 RESUMOS = {"resumo", "abstract", "resumen"}
 PALAVRAS_CHAVE = ("palavras-chave", "keywords", "palabras clave")
 ALINHA = {"esq": WD_ALIGN_PARAGRAPH.LEFT, "dir": WD_ALIGN_PARAGRAPH.RIGHT, "centro": WD_ALIGN_PARAGRAPH.CENTER}
@@ -183,6 +187,29 @@ def _campo(par, instrucao: str, resultado: str = "", tamanho=None):
     e = OxmlElement("w:fldChar")
     e.set(qn("w:fldCharType"), "end")
     r(e)
+
+
+def quebrar_codigo(linha: str, largura: int = LARGURA_CODIGO) -> list[str]:
+    """Quebra uma linha de código longa em pedaços de até `largura` caracteres.
+
+    Cada continuação recebe o recuo da própria linha + 4 espaços. Sem isso, o Word e o LibreOffice
+    devolvem o resto da linha para a margem esquerda e a indentação do Python fica ilegível.
+    A quebra é feita no último espaço que cabe; um trecho sem espaço é cortado na largura.
+    """
+    if len(linha) <= largura:
+        return [linha]
+    recuo = len(linha) - len(linha.lstrip(" "))
+    continuacao = " " * (recuo + 4 if recuo + 4 <= largura // 2 else 4)
+    partes, resto, minimo = [], linha, recuo + 1
+    while len(resto) > largura:
+        corte = resto.rfind(" ", minimo, largura + 1)
+        if corte < minimo:
+            corte = largura
+        partes.append(resto[:corte].rstrip())
+        resto = continuacao + resto[corte:].lstrip(" ")
+        minimo = len(continuacao) + 1
+    partes.append(resto)
+    return partes
 
 
 def _fldchar(par, tipo):
@@ -359,7 +386,7 @@ class DocumentoABNT:
         estilo("Referencia", alinhamento=WD_ALIGN_PARAGRAPH.LEFT, recuo=0, entrelinha=1.0, antes=0, depois=12)
         estilo("Texto de tabela", tamanho=PEQUENA, alinhamento=WD_ALIGN_PARAGRAPH.LEFT, recuo=0, entrelinha=1.0,
                antes=1, depois=1)
-        estilo("Codigo", fonte=FONTE_CODIGO, tamanho=7.5, alinhamento=WD_ALIGN_PARAGRAPH.LEFT, recuo=0,
+        estilo("Codigo", fonte=FONTE_CODIGO, tamanho=TAMANHO_CODIGO, alinhamento=WD_ALIGN_PARAGRAPH.LEFT, recuo=0,
                entrelinha=1.0, antes=0, depois=0)
         estilo("Equacao", alinhamento=WD_ALIGN_PARAGRAPH.LEFT, recuo=0, antes=6, depois=6)
         estilo("Lista ABNT", alinhamento=WD_ALIGN_PARAGRAPH.JUSTIFY, recuo=0)
@@ -973,7 +1000,7 @@ class DocumentoABNT:
                 texto = "\n".join(fonte.split("\n")[a - 1:z])
             else:
                 texto = fonte
-        linhas = texto.expandtabs(4).rstrip("\n").split("\n")
+        linhas = [parte for l in texto.expandtabs(4).rstrip("\n").split("\n") for parte in quebrar_codigo(l)]
         for k, l in enumerate(linhas):
             par = self.doc.add_paragraph(style="Codigo")
             _anexar_pPr(par._p.get_or_add_pPr(), "w:shd", **{"w:val": "clear", "w:color": "auto", "w:fill": "F2F2F2"})
