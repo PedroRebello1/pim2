@@ -97,3 +97,14 @@ O pitch e os slides são gerados a partir dos CSVs. **Os números escritos à m�
 - Quer o processo documentado em Markdown e os artefatos salvos nesta pasta.
 - Quando houver dúvida real sobre os dados, prefere uma pergunta a uma suposição. A troca de plano foi um exemplo.
 - Materiais para o grupo devem ser enxutos, só com o importante.
+
+## Relatório final do PI (ABNT, Word + PDF), nov/2026
+
+- Segue o modelo do professor (`Professor-Weslley/pi-abnt`, feito em Quarto + R), adaptado para Word e PDF gerados em Python no VS Code. Entrega: PDF no Moodle + link do repositório e da release `entrega-final` (passo a passo em `ENTREGA.md`). Prazo: Turma B 02/12, Turma A 04/12, até 23:59.
+- O texto fica em `relatorio_pi.md` (Markdown com os atalhos do modelo: `{.pre}`, `{.pos}`, `::: fonte`, `::: listas`, `{#refs}`, `@fig-`, `@tbl-`, `@sec-`, `@eq-`, `[@chave]`) e as referências em `refs.bib`.
+- `python relatorio/gerar_relatorio.py` (ou Ctrl+Shift+B) gera `relatorio_pi.docx` e `relatorio_pi.pdf`. O PDF sai pelo LibreOffice (`--conversor word` usa o Word via docx2pdf). São duas passadas: converte, lê no PDF a página de cada título e legenda e preenche o sumário e as listas.
+- Números do texto só por `{{nome}}`, calculados em `relatorio/valores.py` a partir de `saidas/` (CSVs e `log_03_analises.txt`) e de `solucao_pim2/resultados/`. Ao rodar o estudo de novo, gravar o log: `python -X utf8 scripts/03_analises.py <pasta_cache> > saidas/log_03_analises.txt`.
+- Gráficos em `relatorio/figuras.py` e tabelas em `relatorio/tabelas.py`. `relatorio/abnt/` é o padrão ABNT em Word (inclui o `padrao.py` do professor, que não deve ser alterado): não mexer sem motivo.
+- O GitHub Actions (`.github/workflows/render.yml`) gera o relatório a cada push e publica o artefato `relatorio-pdf`.
+- Os dados brutos continuam fora do repositório; a justificativa está em `dados/README.md` e na Metodologia do relatório.
+- Pendências da entrega: nomes completos dos integrantes na capa, endereço do repositório no Apêndice A e confirmação, com o professor, de que os dados agregados atendem ao item "dados no repositório".

@@ -1,0 +1,16 @@
+# Pacotes Python do projeto. O GitHub Actions instala daqui para gerar o relatório,
+# então todo pacote usado precisa estar nesta lista.
+
+# Estudo dos dados (scripts/) e Motor de Cobrança (solucao_pim2/)
+pandas
+numpy
+openpyxl
+
+# Relatório final em Word e PDF (relatorio/)
+matplotlib
+python-docx>=1.1
+pyyaml
+pypdf>=4
+
+# Opcional: gerar o PDF pelo Microsoft Word em vez do LibreOffice (Windows/macOS)
+# docx2pdf
